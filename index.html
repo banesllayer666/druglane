@@ -6,7 +6,14 @@
 <title>Pit Lane Dealer — Motorsport Trading Empire</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07070e;--surface:#0f0f1a;--panel:#161625;--panel-h:#1e1e32;--border:#252540;--border-h:#3a3a60;--text:#e2e4f0;--dim:#7880a0;--muted:#3a3d55;--formula:#e63946;--endurance:#4895ef;--rally:#57cc99;--touring:#ff9500;--drag:#ffd60a;--gt:#9b5de5;--success:#57cc99;--warn:#ff9500;--danger:#e63946;--info:#4895ef;--gold:#ffd700;--silver:#c0c0c0;--bronze:#cd7f32;--font-h:'Rajdhani',sans-serif;--font-m:'JetBrains Mono',monospace;--font-b:'Inter',sans-serif;--hdr:58px;--nav:172px;--ticker:36px}
+:root{
+  --bg:#07070e;--surface:#0e0e1a;--panel:#151524;--panel-h:#1d1d32;
+  --border:#262642;--border-h:#3b3b64;--text:#e4e6f2;--dim:#7a82a4;--muted:#3c3f5c;
+  --formula:#e63946;--endurance:#4895ef;--rally:#57cc99;--touring:#ff9500;--drag:#ffd60a;--gt:#9b5de5;
+  --success:#57cc99;--warn:#ff9500;--danger:#e63946;--info:#4895ef;--gold:#ffd700;--silver:#c0c0c0;--bronze:#cd7f32;
+  --font-h:'Rajdhani',sans-serif;--font-m:'JetBrains Mono',monospace;--font-b:'Inter',sans-serif;
+  --hdr:62px;--nav:180px;--ticker:36px;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:14px;overflow:hidden;height:100vh}
 button{cursor:pointer;border:none;font-family:inherit;transition:all .15s}
@@ -14,16 +21,20 @@ input{font-family:inherit;outline:none}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border-h);border-radius:3px}
 
 /* HEADER */
-#hdr{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 16px;z-index:100}
-#logo{font-family:var(--font-h);font-size:18px;font-weight:700;letter-spacing:2px;background:linear-gradient(135deg,var(--formula),var(--drag));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.15;white-space:nowrap}
-.hsep{width:1px;height:30px;background:var(--border)}
-.hstat{display:flex;flex-direction:column;align-items:center;min-width:82px}
-.hstat .lbl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+#hdr{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:rgba(14,14,26,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 16px;z-index:100}
+#logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+#logo-badge{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--formula);box-shadow:0 0 12px rgba(230,57,70,0.4)}
+#logo-text{display:flex;flex-direction:column}
+#logo-title{font-family:var(--font-h);font-size:17px;font-weight:700;letter-spacing:1.5px;background:linear-gradient(135deg,var(--formula),var(--drag));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1}
+#logo-sub{font-size:9px;color:var(--dim);letter-spacing:1px;text-transform:uppercase}
+.hsep{width:1px;height:32px;background:var(--border)}
+.hstat{display:flex;flex-direction:column;align-items:center;min-width:85px}
+.hstat .lbl{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:4px}
 .hstat .val{font-family:var(--font-m);font-size:15px;font-weight:500}
-#city-badge{display:flex;align-items:center;gap:8px;padding:6px 14px;background:var(--panel);border:1px solid var(--border);border-radius:8px;font-family:var(--font-h);font-size:15px;font-weight:600}
-#ap-bar{display:flex;gap:5px;align-items:center}
-.ap-pip{width:13px;height:13px;border-radius:50%;background:var(--border);transition:background .2s}
-.ap-pip.on{background:var(--drag);box-shadow:0 0 7px var(--drag)}
+#city-badge{display:flex;align-items:center;gap:8px;padding:5px 12px;background:var(--panel);border:1px solid var(--border);border-radius:8px;font-family:var(--font-h);font-size:14px;font-weight:600}
+#ap-bar{display:flex;gap:5px;align-items:center;background:rgba(21,21,36,0.7);padding:4px 8px;border-radius:6px;border:1px solid var(--border)}
+.ap-pip{width:12px;height:12px;border-radius:50%;background:var(--border);transition:all .2s}
+.ap-pip.on{background:var(--drag);box-shadow:0 0 8px var(--drag)}
 #wk-badge{font-family:var(--font-m);font-size:11px;color:var(--dim);background:var(--panel);border:1px solid var(--border);padding:4px 10px;border-radius:6px}
 .hright{margin-left:auto;display:flex;align-items:center;gap:8px}
 .rep-track{width:68px;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
@@ -31,43 +42,57 @@ input{font-family:inherit;outline:none}
 
 /* LAYOUT */
 #layout{display:flex;margin-top:var(--hdr);height:calc(100vh - var(--hdr) - var(--ticker))}
-#sidebar{width:var(--nav);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:10px 8px;gap:3px}
-.nb{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:transparent;color:var(--dim);font-family:var(--font-h);font-size:15px;font-weight:600;letter-spacing:.5px;text-align:left;border:1px solid transparent;width:100%}
+#sidebar{width:var(--nav);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:12px 8px;gap:4px}
+.nb{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:transparent;color:var(--dim);font-family:var(--font-h);font-size:14px;font-weight:600;letter-spacing:.5px;text-align:left;border:1px solid transparent;width:100%}
 .nb:hover{background:var(--panel);color:var(--text);border-color:var(--border)}
 .nb.active{background:var(--panel-h);color:var(--text);border-color:var(--border-h)}
-.nb .ico{font-size:17px;width:20px;text-align:center}
-.ndiv{height:1px;background:var(--border);margin:6px 0}
-#etb{margin-top:auto;padding:11px;border-radius:8px;background:linear-gradient(135deg,#152515,#0f2a0f);color:var(--success);font-family:var(--font-h);font-size:15px;font-weight:700;letter-spacing:1px;border:1px solid var(--success);width:100%}
+.nb .ico{width:18px;height:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nb .ico svg{width:100%;height:100%}
+.ndiv{height:1px;background:var(--border);margin:8px 0}
+#etb{margin-top:auto;padding:11px;border-radius:8px;background:linear-gradient(135deg,#122518,#0a2012);color:var(--success);font-family:var(--font-h);font-size:14px;font-weight:700;letter-spacing:1px;border:1px solid rgba(87,204,153,0.4);width:100%;display:flex;align-items:center;justify-content:center;gap:8px}
 #etb:hover{background:var(--success);color:var(--bg);box-shadow:0 0 18px rgba(87,204,153,.3)}
-#content{flex:1;overflow-y:auto;padding:20px}
+#content{flex:1;overflow-y:auto;padding:22px}
 .tp{display:none}.tp.active{display:block}
 
 /* TICKER */
-#ticker{position:fixed;bottom:0;left:0;right:0;height:var(--ticker);background:var(--surface);border-top:1px solid var(--border);overflow:hidden;display:flex;align-items:center}
+#ticker{position:fixed;bottom:0;left:0;right:0;height:var(--ticker);background:var(--surface);border-top:1px solid var(--border);overflow:hidden;display:flex;align-items:center;z-index:90}
 .tkinner{display:flex;gap:48px;white-space:nowrap;animation:tscroll 50s linear infinite}
 .tkinner:hover{animation-play-state:paused}
-.tki{font-family:var(--font-m);font-size:11px;color:var(--dim);padding:0 8px}
+.tki{font-family:var(--font-m);font-size:11px;color:var(--dim);padding:0 8px;display:inline-flex;align-items:center;gap:6px}
 .tki.up{color:var(--success)}.tki.dn{color:var(--danger)}.tki.ev{color:var(--warn)}
 @keyframes tscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* PAGE */
-.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
-.pt{font-family:var(--font-h);font-size:23px;font-weight:700;letter-spacing:1px}
+/* COMMON UI */
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px}
+.pt{font-family:var(--font-h);font-size:23px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:10px}
 .ps{font-size:12px;color:var(--dim);margin-top:2px}
-
-/* CARDS */
 .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
-.ct{font-family:var(--font-h);font-size:15px;font-weight:700;letter-spacing:.5px;margin-bottom:12px}
+.ct{font-family:var(--font-h);font-size:15px;font-weight:700;letter-spacing:.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+
+/* HERO BANNER */
+.hero-banner{position:relative;border-radius:12px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border);background:#000;display:flex;align-items:center;min-height:115px}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35;filter:contrast(1.15) saturate(1.1)}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(90deg, rgba(7,7,14,0.92) 0%, rgba(7,7,14,0.65) 60%, rgba(7,7,14,0.3) 100%)}
+.hero-content{position:relative;z-index:2;padding:18px 24px;max-width:70%}
+.hero-tag{font-family:var(--font-h);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--drag);text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.hero-title{font-family:var(--font-h);font-size:22px;font-weight:700;letter-spacing:1px;color:#fff;line-height:1.2}
+.hero-desc{font-size:12px;color:var(--dim);margin-top:4px;line-height:1.4}
+.hero-side{position:relative;z-index:2;margin-left:auto;padding-right:24px;display:flex;gap:16px;align-items:center}
 
 /* MARKET */
-.mc{display:flex;gap:7px;margin-bottom:13px;flex-wrap:wrap}
-.fb{padding:5px 13px;border-radius:20px;background:var(--panel);color:var(--dim);border:1px solid var(--border);font-family:var(--font-h);font-size:12px;font-weight:600;cursor:pointer}
+.mc{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.fb{padding:5px 13px;border-radius:20px;background:var(--panel);color:var(--dim);border:1px solid var(--border);font-family:var(--font-h);font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .fb:hover,.fb.a{color:var(--text);border-color:var(--border-h);background:var(--panel-h)}
+.fb .fbi{width:14px;height:14px}
 .mtbl{width:100%;border-collapse:collapse}
-.mtbl th{text-align:left;padding:8px 12px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);border-bottom:1px solid var(--border);font-family:var(--font-h);font-weight:600}
-.mtbl td{padding:7px 12px;border-bottom:1px solid rgba(37,37,64,.5)}
+.mtbl th{text-align:left;padding:10px 12px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);border-bottom:1px solid var(--border);font-family:var(--font-h);font-weight:600}
+.mtbl td{padding:9px 12px;border-bottom:1px solid rgba(38,38,66,0.6)}
 .mtbl tr:hover td{background:var(--panel-h)}
-.pn{font-weight:600;font-size:13px}.pd{font-size:11px;color:var(--dim);margin-top:1px}
+.pcell{display:flex;align-items:center;gap:12px}
+.pico-wrap{width:36px;height:36px;border-radius:8px;background:rgba(21,21,36,0.8);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pico-wrap svg{width:22px;height:22px}
+.pn{font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px}
+.pd{font-size:11px;color:var(--dim);margin-top:2px}
 .cb{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-family:var(--font-h);font-weight:600;letter-spacing:.5px}
 .ce{background:rgba(230,57,70,.15);color:var(--formula)}.cg{background:rgba(230,57,70,.1);color:#e88}
 .ca{background:rgba(72,149,239,.15);color:var(--endurance)}.cs{background:rgba(87,204,153,.15);color:var(--rally)}
@@ -76,120 +101,120 @@ input{font-family:inherit;outline:none}
 .pc{font-family:var(--font-m);font-size:13px;font-weight:500}
 .pu{color:var(--danger)}.pd2{color:var(--success)}.pn2{color:var(--text)}
 .sn{font-family:var(--font-m);font-size:12px;color:var(--dim)}
-.gtag{color:var(--warn);font-size:11px;font-weight:700}
-.bbuy{padding:5px 13px;border-radius:6px;background:rgba(87,204,153,.15);color:var(--success);border:1px solid rgba(87,204,153,.3);font-family:var(--font-h);font-size:12px;font-weight:700}
+.gtag{color:var(--warn);font-size:10px;font-weight:700;padding:2px 5px;background:rgba(255,149,0,0.12);border:1px solid rgba(255,149,0,0.3);border-radius:4px}
+.bbuy{padding:6px 14px;border-radius:6px;background:rgba(87,204,153,.15);color:var(--success);border:1px solid rgba(87,204,153,.3);font-family:var(--font-h);font-size:12px;font-weight:700}
 .bbuy:hover{background:var(--success);color:var(--bg)}
-.bdis{padding:5px 13px;border-radius:6px;background:var(--panel);color:var(--muted);border:1px solid var(--border);font-family:var(--font-h);font-size:12px;font-weight:700;cursor:not-allowed}
+.bdis{padding:6px 14px;border-radius:6px;background:var(--panel);color:var(--muted);border:1px solid var(--border);font-family:var(--font-h);font-size:12px;font-weight:700;cursor:not-allowed}
 
 /* GARAGE / WAREHOUSE */
-.cstats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-.sc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px}
-.sn2{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
-.sv{font-family:var(--font-m);font-size:25px;font-weight:500;margin:3px 0}
-.sb{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:5px}
+.cstats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.sc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;position:relative;overflow:hidden}
+.sn2{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+.sn2 svg{width:14px;height:14px}
+.sv{font-family:var(--font-m);font-size:26px;font-weight:600;margin:4px 0}
+.sb{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px}
 .sf{height:100%;border-radius:3px;transition:width .4s}
 .fspd{background:linear-gradient(90deg,var(--info),var(--endurance))}.frel{background:linear-gradient(90deg,var(--success),#2ecc71)}.faero{background:linear-gradient(90deg,var(--gt),var(--info))}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
-.pcard{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px;transition:border-color .15s}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.pcard{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;transition:border-color .15s}
 .pcard:hover{border-color:var(--border-h)}.pcard.gp{border-color:rgba(255,149,0,.4)}
-.pct{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.pcn{font-family:var(--font-h);font-size:14px;font-weight:700}
-.cbar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin:6px 0}
-.cfil{height:100%;border-radius:2px;transition:width .3s}
+.pct{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.pcn{font-family:var(--font-h);font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.cbar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin:8px 0}
+.cfil{height:100%;border-radius:3px;transition:width .3s}
 .cgood{background:var(--success)}.cok{background:var(--warn)}.cbad{background:var(--danger)}
-.pst{display:flex;gap:10px;font-family:var(--font-m);font-size:11px;color:var(--dim);margin-bottom:8px}
-.pacts{display:flex;gap:6px}
-.bsm{padding:4px 11px;border-radius:5px;font-family:var(--font-h);font-size:11px;font-weight:700;letter-spacing:.5px;cursor:pointer;border:none}
-.bins{background:rgba(72,149,239,.15);color:var(--info);border:1px solid rgba(72,149,239,.3)!important}.bins:hover{background:var(--info);color:#fff}
-.buns{background:rgba(230,57,70,.15);color:var(--danger);border:1px solid rgba(230,57,70,.3)!important}.buns:hover{background:var(--danger);color:#fff}
-.bssp{background:rgba(87,204,153,.1);color:var(--success);border:1px solid rgba(87,204,153,.25)!important}.bssp:hover{background:var(--success);color:var(--bg)}
+.pst{display:flex;gap:12px;font-family:var(--font-m);font-size:11px;color:var(--dim);margin-bottom:10px}
+.pacts{display:flex;gap:7px;align-items:center}
+.bsm{padding:5px 12px;border-radius:6px;font-family:var(--font-h);font-size:11px;font-weight:700}
+.bins{background:rgba(72,149,239,.15);color:var(--info);border:1px solid rgba(72,149,239,.3)}.bins:hover{background:var(--info);color:var(--bg)}
+.buns{background:rgba(255,149,0,.15);color:var(--warn);border:1px solid rgba(255,149,0,.3)}.buns:hover{background:var(--warn);color:var(--bg)}
+.bssp{background:rgba(87,204,153,.15);color:var(--success);border:1px solid rgba(87,204,153,.3)}.bssp:hover{background:var(--success);color:var(--bg)}
 
-/* FINANCE */
-.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin-bottom:16px}
-.fc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px}
-.fl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
-.fv{font-family:var(--font-m);font-size:20px;font-weight:500}
-.fv.pos{color:var(--success)}.fv.neg{color:var(--danger)}.fv.wrn{color:var(--warn)}
-.lrow{display:flex;align-items:center;justify-content:space-between;padding:13px;background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:8px}
-.lname{font-family:var(--font-h);font-size:15px;font-weight:700;margin-bottom:2px}
-.ldet{font-size:11px;color:var(--dim)}
-.lbal{font-family:var(--font-m);font-size:17px;font-weight:500;margin:0 14px}
-.lacts{display:flex;gap:6px}
-.bbrw{padding:7px 14px;border-radius:7px;background:rgba(72,149,239,.15);color:var(--info);border:1px solid rgba(72,149,239,.3);font-family:var(--font-h);font-size:13px;font-weight:700;cursor:pointer}
-.bbrw:hover{background:var(--info);color:#fff}
-.consd{border-color:rgba(230,57,70,.6)!important;animation:pb 1.8s infinite}
-@keyframes pb{0%,100%{border-color:rgba(230,57,70,.5)}50%{border-color:var(--danger)}}
-
-/* RACE */
-.rhdr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.rcp{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
-.rlist{display:flex;flex-direction:column;gap:8px}
-.rcard{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;display:flex;align-items:center;gap:14px;transition:border-color .15s}
+/* RACES */
+.rhdr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.rcp{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:15px}
+.rlist{display:flex;flex-direction:column;gap:10px}
+.rcard{display:flex;align-items:center;gap:14px;padding:14px;background:var(--panel);border:1px solid var(--border);border-radius:10px;transition:border-color .15s}
 .rcard:hover{border-color:var(--border-h)}
-.rdb{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.dfo{background:rgba(230,57,70,.2)}.den{background:rgba(72,149,239,.2)}.dra{background:rgba(87,204,153,.2)}
-.dto{background:rgba(255,149,0,.2)}.ddr{background:rgba(255,214,10,.2)}.dgt{background:rgba(155,93,229,.2)}
-.ri{flex:1}.rn{font-family:var(--font-h);font-size:16px;font-weight:700}
-.rdt{font-size:11px;color:var(--dim);margin-top:2px}
-.rp{font-family:var(--font-m);font-size:15px;color:var(--success);font-weight:500}
-.benter{padding:8px 16px;border-radius:8px;background:linear-gradient(135deg,rgba(230,57,70,.2),rgba(255,149,0,.2));color:var(--text);border:1px solid rgba(230,57,70,.4);font-family:var(--font-h);font-size:13px;font-weight:700;letter-spacing:.5px;cursor:pointer}
-.benter:hover{background:linear-gradient(135deg,var(--formula),var(--warn));color:#fff;box-shadow:0 0 16px rgba(230,57,70,.3)}
-.rhist{margin-top:16px}
-.hrow{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid rgba(37,37,64,.5)}
-.pb{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:13px;font-weight:700}
-.p1{background:rgba(255,215,0,.2);color:var(--gold)}.p2{background:rgba(192,192,192,.2);color:var(--silver)}
-.p3{background:rgba(205,127,50,.2);color:var(--bronze)}.pdnf{background:rgba(230,57,70,.15);color:var(--danger)}.poth{background:var(--panel);color:var(--dim)}
+.rdb{width:46px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.rdb svg{width:26px;height:26px}
+.dform{background:rgba(230,57,70,.18);color:var(--formula)}.dend{background:rgba(72,149,239,.18);color:var(--endurance)}
+.drally{background:rgba(87,204,153,.18);color:var(--rally)}.dtour{background:rgba(255,149,0,.18);color:var(--touring)}
+.ddrag{background:rgba(255,214,10,.18);color:var(--drag)}.dgt{background:rgba(155,93,229,.18);color:var(--gt)}
+.ri{flex:1}.rn{font-family:var(--font-h);font-size:16px;font-weight:700}.rdt{font-size:11px;color:var(--dim);margin-top:2px}
+.rp{font-family:var(--font-m);font-size:15px;color:var(--success);font-weight:600}
+.benter{padding:7px 16px;border-radius:7px;background:linear-gradient(135deg,var(--formula),#b51722);color:#fff;font-family:var(--font-h);font-size:12px;font-weight:700;letter-spacing:.5px}
+.benter:hover{box-shadow:0 0 14px rgba(230,57,70,.4);transform:translateY(-1px)}
+.rhist{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto}
+.hrow{display:flex;align-items:center;gap:12px;padding:8px 12px;background:var(--panel);border-radius:6px;border:1px solid var(--border)}
+.pb{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:12px;font-weight:700}
+.p1{background:var(--gold);color:#000}.p2{background:var(--silver);color:#000}.p3{background:var(--bronze);color:#000}.pdnf{background:var(--danger);color:#fff}.poth{background:var(--muted);color:var(--dim)}
 
-/* TRAVEL */
-.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.cityc{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:13px;cursor:pointer;transition:all .2s}
+/* TRAVEL / CITIES */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.cityc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:all .15s;position:relative}
 .cityc:hover{border-color:var(--border-h);transform:translateY(-2px)}
-.cityc.cur{border-color:var(--success);background:rgba(87,204,153,.04);cursor:default}
-.ctop{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.cflag{font-size:24px}.cname{font-family:var(--font-h);font-size:15px;font-weight:700}.ccnt{font-size:10px;color:var(--dim)}
-.cspec{font-size:11px;color:var(--dim);margin-bottom:8px;padding:3px 7px;background:var(--panel-h);border-radius:4px;display:inline-block}
+.cityc.cur{border-color:var(--success);box-shadow:0 0 14px rgba(87,204,153,.15)}
+.ctop{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.cflag{font-size:24px;line-height:1}
+.cname{font-family:var(--font-h);font-size:16px;font-weight:700}.ccnt{font-size:11px;color:var(--dim)}
+.cspec{font-size:11px;color:var(--dim);margin-bottom:8px;padding:3px 8px;background:var(--panel-h);border-radius:4px;display:inline-block}
 .cprices{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
 .cpt{font-size:10px;padding:2px 6px;border-radius:4px}
 .cheap{background:rgba(87,204,153,.1);color:var(--success)}.pricey{background:rgba(230,57,70,.1);color:var(--danger)}
 .tcost{display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--border)}
 .tfee{font-family:var(--font-m);font-size:11px;color:var(--warn)}
-.btrv{padding:5px 12px;border-radius:6px;background:rgba(255,214,10,.1);color:var(--drag);border:1px solid rgba(255,214,10,.3);font-family:var(--font-h);font-size:11px;font-weight:700;cursor:pointer}
+.btrv{padding:5px 12px;border-radius:6px;background:rgba(255,214,10,.1);color:var(--drag);border:1px solid rgba(255,214,10,.3);font-family:var(--font-h);font-size:11px;font-weight:700}
 .btrv:hover{background:var(--drag);color:var(--bg)}
 
+/* FINANCE */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.fc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px}
+.fl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+.fv{font-family:var(--font-m);font-size:22px;font-weight:600;margin-top:3px}
+.fv.pos{color:var(--success)}.fv.neg{color:var(--danger)}.fv.wrn{color:var(--warn)}
+.lrow{display:flex;align-items:center;gap:14px;padding:13px 16px;background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:8px}
+.lrow.consd{border-color:rgba(230,57,70,0.5);background:rgba(230,57,70,0.04)}
+.lname{font-family:var(--font-h);font-size:15px;font-weight:700}
+.ldet{font-size:11px;color:var(--dim);margin-top:2px}
+.lbal{font-family:var(--font-m);font-size:18px;font-weight:600;margin-left:auto}
+.bbrw{padding:6px 14px;border-radius:6px;background:rgba(72,149,239,.15);color:var(--info);border:1px solid rgba(72,149,239,.3);font-family:var(--font-h);font-size:12px;font-weight:700}
+.bbrw:hover{background:var(--info);color:var(--bg)}
+
 /* MODAL */
-#mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;backdrop-filter:blur(4px);align-items:center;justify-content:center}
+#mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;backdrop-filter:blur(6px);align-items:center;justify-content:center}
 #mo.open{display:flex}
-#mb{background:var(--panel);border:1px solid var(--border-h);border-radius:16px;padding:24px;min-width:340px;max-width:490px;width:90%;box-shadow:0 0 50px rgba(0,0,0,.8)}
-.mtt{font-family:var(--font-h);font-size:21px;font-weight:700;margin-bottom:13px}
+#mb{background:var(--panel);border:1px solid var(--border-h);border-radius:16px;padding:24px;min-width:340px;max-width:500px;width:90%;box-shadow:0 0 50px rgba(0,0,0,.85)}
+.mtt{font-family:var(--font-h);font-size:22px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .mbd{margin-bottom:16px;color:var(--dim);line-height:1.65;font-size:13px}
 .mbd strong{color:var(--text)}
 .mac{display:flex;gap:8px;justify-content:flex-end}
-.mi{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 13px;color:var(--text);font-size:16px;margin-bottom:11px}
+.mi{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 13px;color:var(--text);font-size:15px;margin-bottom:12px}
 .mi:focus{border-color:var(--info)}
 .bcon{padding:8px 20px;border-radius:8px;background:var(--success);color:var(--bg);font-family:var(--font-h);font-size:14px;font-weight:700;cursor:pointer}
 .bcan{padding:8px 20px;border-radius:8px;background:var(--panel-h);color:var(--dim);border:1px solid var(--border);font-family:var(--font-h);font-size:14px;font-weight:700;cursor:pointer}
 
 /* TOAST */
-#tc{position:fixed;top:66px;right:14px;z-index:300;display:flex;flex-direction:column;gap:7px}
-.toast{padding:10px 15px;border-radius:9px;font-size:12px;font-weight:500;border:1px solid;animation:tin .3s ease;max-width:310px;line-height:1.4}
-.ts{background:rgba(87,204,153,.1);border-color:var(--success);color:var(--success)}
-.tw{background:rgba(255,149,0,.1);border-color:var(--warn);color:var(--warn)}
-.td{background:rgba(230,57,70,.1);border-color:var(--danger);color:var(--danger)}
-.ti{background:rgba(72,149,239,.1);border-color:var(--info);color:var(--info)}
+#tc{position:fixed;top:70px;right:16px;z-index:300;display:flex;flex-direction:column;gap:8px}
+.toast{padding:10px 16px;border-radius:9px;font-size:12px;font-weight:500;border:1px solid;animation:tin .3s ease;max-width:320px;line-height:1.4}
+.ts{background:rgba(87,204,153,.15);border-color:var(--success);color:var(--success)}
+.tw{background:rgba(255,149,0,.15);border-color:var(--warn);color:var(--warn)}
+.td{background:rgba(230,57,70,.15);border-color:var(--danger);color:var(--danger)}
+.ti{background:rgba(72,149,239,.15);border-color:var(--info);color:var(--info)}
 @keyframes tin{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
 
 /* MISC */
 .rg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
 .rs{text-align:center;padding:12px;background:var(--surface);border-radius:8px}
-.rv{font-family:var(--font-m);font-size:23px;font-weight:500}
+.rv{font-family:var(--font-m);font-size:22px;font-weight:600}
 .rl{font-size:10px;color:var(--dim);margin-top:2px}
-.empty{text-align:center;padding:34px;color:var(--dim)}
-.eico{font-size:34px;margin-bottom:8px}
+.empty{text-align:center;padding:36px;color:var(--dim)}
+.eico{width:42px;height:42px;margin:0 auto 10px;color:var(--dim);opacity:0.6}
 .sep{height:1px;background:var(--border);margin:16px 0}
-.ib{padding:10px 14px;border-radius:8px;background:rgba(72,149,239,.07);border:1px solid rgba(72,149,239,.2);font-size:12px;color:var(--dim);line-height:1.6;margin-bottom:13px}
+.ib{padding:11px 15px;border-radius:8px;background:rgba(72,149,239,.08);border:1px solid rgba(72,149,239,.25);font-size:12px;color:var(--dim);line-height:1.6;margin-bottom:14px}
 .elog{max-height:240px;overflow-y:auto}
-.lent{padding:6px 0;border-bottom:1px solid rgba(37,37,64,.5);font-size:12px;color:var(--dim)}
-.lent .wt{font-family:var(--font-m);font-size:10px;color:var(--muted);margin-right:5px}
+.lent{padding:7px 0;border-bottom:1px solid rgba(38,38,66,.5);font-size:12px;color:var(--dim)}
+.lent .wt{font-family:var(--font-m);font-size:10px;color:var(--muted);margin-right:6px}
 .lg{color:var(--success)}.lb{color:var(--danger)}.lev{color:var(--warn)}
 </style>
 </head>
@@ -197,22 +222,46 @@ input{font-family:inherit;outline:none}
 
 <!-- HEADER -->
 <header id="hdr">
-  <div id="logo">PIT LANE<br>DEALER</div>
+  <div id="logo-wrap" onclick="G.tab='market';render()">
+    <img src="assets/vectors/race_car_badge.jpg" id="logo-badge" alt="Druglane">
+    <div id="logo-text">
+      <div id="logo-title">PIT LANE DEALER</div>
+      <div id="logo-sub">Motorsport Trading Empire</div>
+    </div>
+  </div>
   <div class="hsep"></div>
   <div id="city-badge"><span id="hfl">🇵🇹</span><span id="hct">Portimão</span></div>
   <div class="hsep"></div>
-  <div class="hstat"><span class="lbl">Cash</span><span class="val" id="hca" style="color:var(--success)">$10,000</span></div>
-  <div class="hstat"><span class="lbl">Debt</span><span class="val" id="hdb" style="color:var(--danger)">$0</span></div>
-  <div class="hstat"><span class="lbl">Net Worth</span><span class="val" id="hnw">$10,000</span></div>
+  <div class="hstat">
+    <span class="lbl">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v12M15 9.5a2.5 2.5 0 0 0-5 0c0 3 5 2 5 5a2.5 2.5 0 0 1-5 0"/></svg>
+      Cash
+    </span>
+    <span class="val" id="hca" style="color:var(--success)">$10,000</span>
+  </div>
+  <div class="hstat">
+    <span class="lbl">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Debt
+    </span>
+    <span class="val" id="hdb" style="color:var(--danger)">$0</span>
+  </div>
+  <div class="hstat">
+    <span class="lbl">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2M6 3h12v7a6 6 0 0 1-12 0V3zM9 21h6M12 16v5"/></svg>
+      Net Worth
+    </span>
+    <span class="val" id="hnw">$10,000</span>
+  </div>
   <div class="hsep"></div>
   <div id="ap-bar" title="Action Points this week">
-    <span style="font-size:10px;color:var(--dim);margin-right:3px">AP</span>
+    <span style="font-size:10px;color:var(--dim);margin-right:4px;font-weight:600">AP</span>
     <div class="ap-pip on" id="ap0"></div><div class="ap-pip on" id="ap1"></div>
     <div class="ap-pip on" id="ap2"></div><div class="ap-pip on" id="ap3"></div><div class="ap-pip on" id="ap4"></div>
   </div>
-  <div id="wk-badge">Wk<span id="hwk">1</span> S<span id="hss">1</span></div>
+  <div id="wk-badge">Wk <span id="hwk">1</span> S<span id="hss">1</span></div>
   <div class="hright">
-    <span style="font-size:10px;color:var(--dim)">REP</span>
+    <span style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px">Rep</span>
     <div class="rep-track"><div class="rep-fill" id="hrp" style="width:50%"></div></div>
     <span style="font-family:var(--font-m);font-size:11px;color:var(--dim)" id="hrv">50</span>
   </div>
@@ -221,14 +270,47 @@ input{font-family:inherit;outline:none}
 <!-- LAYOUT -->
 <div id="layout">
   <nav id="sidebar">
-    <button class="nb active" data-tab="market"><span class="ico">📈</span>Market</button>
-    <button class="nb" data-tab="garage"><span class="ico">🏎️</span>Garage</button>
-    <button class="nb" data-tab="warehouse"><span class="ico">📦</span>Warehouse</button>
-    <button class="nb" data-tab="finance"><span class="ico">💰</span>Finance</button>
-    <button class="nb" data-tab="race"><span class="ico">🏁</span>Race</button>
-    <button class="nb" data-tab="travel"><span class="ico">🗺️</span>Travel</button>
+    <button class="nb active" data-tab="market">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-5 5"/></svg>
+      </span>
+      Market
+    </button>
+    <button class="nb" data-tab="garage">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 13l2-5h14l2 5M2 16h20v2H2z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+      </span>
+      Garage
+    </button>
+    <button class="nb" data-tab="warehouse">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M10 4v16"/></svg>
+      </span>
+      Warehouse
+    </button>
+    <button class="nb" data-tab="finance">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M6 12h.01M18 12h.01"/></svg>
+      </span>
+      Finance
+    </button>
+    <button class="nb" data-tab="race">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4v16M4 4h12l-2 4 2 4H4"/></svg>
+      </span>
+      Race
+    </button>
+    <button class="nb" data-tab="travel">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 0 0 18M12 3a14 14 0 0 1 0 18"/></svg>
+      </span>
+      Travel
+    </button>
     <div class="ndiv"></div>
-    <button id="etb">⏩ END WEEK</button>
+    <button id="etb">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20"/></svg>
+      END WEEK
+    </button>
   </nav>
   <main id="content">
     <div id="tab-market" class="tp active"></div>
@@ -244,26 +326,75 @@ input{font-family:inherit;outline:none}
 <div id="tc"></div>
 
 <script>
+// ══════════ VECTOR ICONS REGISTRY ══════════
+// High-detail vector icons inspired by Vecteezy automotive & racing collections
+const V_ICONS = {
+  engine: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M2 10v4M22 10v4M8 6V3h8v3M9 18v3h6v-3M9 11h6M12 8v6"/></svg>`,
+  hybrid: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M13 2l-3 7h5l-3 7"/></svg>`,
+  turbo: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 8a4 4 0 0 1 4 4M8 12a4 4 0 0 1 4-4M12 16a4 4 0 0 1-4-4M16 12a4 4 0 0 1-4 4M21 9h-3M3 15h3"/></svg>`,
+  gearbox: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+  wing_front: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14h20l-3-4H5l-3 4z"/><path d="M4 14v4M20 14v4M7 10V6M17 10V6"/></svg>`,
+  wing_rear: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h20v4H2z"/><path d="M6 11v8M18 11v8M10 11v5h4v-5"/></svg>`,
+  diffuser: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h20L19 6H5L2 18z"/><line x1="8" y1="18" x2="9" y2="10"/><line x1="12" y1="18" x2="12" y2="8"/><line x1="16" y1="18" x2="15" y2="10"/></svg>`,
+  suspension: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><circle cx="12" cy="20" r="2"/><path d="M12 6v2l-3 1.5 6 3-6 3 6 3-3 1.5v2"/></svg>`,
+  suspension_wrc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="4" r="2"/><circle cx="10" cy="20" r="2"/><path d="M10 6v2l-3 1.5 6 3-6 3 6 3-3 1.5v2"/><rect x="17" y="8" width="4" height="8" rx="1"/><path d="M12 11h5"/></svg>`,
+  brakes: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3a9 9 0 0 1 9 9h-4a5 5 0 0 0-5-5V3z"/></svg>`,
+  ducts: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15s3-4 9-4 9 4 9 4v-4s-3-4-9-4-9 4-9 4v4z"/><path d="M7 13v4M12 11v6M17 13v4"/></svg>`,
+  ecu: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="9" r="1"/><circle cx="12" cy="15" r="1"/><path d="M5 9H2M5 15H2M19 9h3M19 15h3M9 5V2M15 5V2M9 19v3M15 19v3"/></svg>`,
+  logger: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M12 6V2M8 12h8M8 16h5"/><circle cx="16" cy="16" r="1"/></svg>`,
+  tyres: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5"/><line x1="12" y1="3" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="21"/><line x1="3" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="21" y2="12"/></svg>`,
+  tyres_wet: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M10 5l2 2-2 2M14 15l2 2-2 2M5 14l2-2 2 2M15 10l2-2 2 2"/></svg>`,
+  fuel: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="12" height="16" rx="2"/><path d="M16 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2M8 4V2h4v2M7 9h6"/></svg>`,
+  fuel_cell: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M8 6V3h8v3M7 11h10M7 15h10M12 6v14"/></svg>`,
+  grey: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+  flag: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V3M4 4h14l-3 4 3 4H4"/></svg>`,
+  trophy: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2M6 3h12v7a6 6 0 0 1-12 0V3zM9 21h6M12 16v5"/></svg>`
+};
+
+function partSvg(pid){
+  const m = {
+    formula_engine: V_ICONS.engine,
+    mguk: V_ICONS.hybrid,
+    turbo: V_ICONS.turbo,
+    gearbox: V_ICONS.gearbox,
+    front_wing: V_ICONS.wing_front,
+    rear_wing: V_ICONS.wing_rear,
+    diffuser: V_ICONS.diffuser,
+    suspension_road: V_ICONS.suspension,
+    suspension_wrc: V_ICONS.suspension_wrc,
+    brakes_carbon: V_ICONS.brakes,
+    brake_ducts: V_ICONS.ducts,
+    ecu: V_ICONS.ecu,
+    data_logger: V_ICONS.logger,
+    tyres_c3: V_ICONS.tyres,
+    tyres_wet: V_ICONS.tyres_wet,
+    fuel_system: V_ICONS.fuel,
+    fuel_cell_lmp: V_ICONS.fuel_cell,
+    grey_aero: V_ICONS.grey
+  };
+  return m[pid] || V_ICONS.engine;
+}
+
 // ══════════ DATA ══════════
 const PARTS={
-  formula_engine:{id:'formula_engine',name:'Formula Engine',cat:'engine',e:'⚙️',base:85000,sl:4,spd:28,rel:15,aero:0,grey:false,desc:'High-revving naturally aspirated formula unit'},
-  mguk:{id:'mguk',name:'MGU-K Hybrid Unit',cat:'engine',e:'⚡',base:82000,sl:3,spd:22,rel:8,aero:0,grey:false,desc:'Motor Generator Unit — kinetic energy recovery'},
-  turbo:{id:'turbo',name:'Turbo Assembly',cat:'engine',e:'💨',base:31000,sl:3,spd:18,rel:8,aero:0,grey:false,desc:'Forced induction for endurance and rally classes'},
-  gearbox:{id:'gearbox',name:'Sequential Gearbox',cat:'gearbox',e:'🔧',base:45000,sl:4,spd:10,rel:12,aero:0,grey:false,desc:'Racing 7-speed paddle-shift sequential transmission'},
-  front_wing:{id:'front_wing',name:'Carbon Front Wing',cat:'aero',e:'🛩️',base:28000,sl:2,spd:12,rel:3,aero:10,grey:false,desc:'Full carbon fibre front wing with adjustable flaps'},
-  rear_wing:{id:'rear_wing',name:'Rear Wing Assembly',cat:'aero',e:'🪁',base:24000,sl:2,spd:8,rel:3,aero:8,grey:false,desc:'High-downforce rear wing with DRS capability'},
-  diffuser:{id:'diffuser',name:'Carbon Diffuser',cat:'aero',e:'📐',base:19000,sl:2,spd:8,rel:2,aero:7,grey:false,desc:'Rear diffuser for ground-effect downforce generation'},
-  suspension_road:{id:'suspension_road',name:'Road Suspension Kit',cat:'suspension',e:'🔩',base:18000,sl:2,spd:8,rel:12,aero:0,grey:false,desc:'Adjustable coilover suspension for circuit racing'},
-  suspension_wrc:{id:'suspension_wrc',name:'WRC Rally Suspension',cat:'suspension',e:'🌿',base:26000,sl:2,spd:12,rel:18,aero:0,grey:false,desc:'Long-travel suspension for gravel and snow stages'},
-  brakes_carbon:{id:'brakes_carbon',name:'Carbon Brake System',cat:'brakes',e:'🔴',base:14000,sl:2,spd:5,rel:15,aero:0,grey:false,desc:'Carbon-carbon disc and caliper system'},
-  brake_ducts:{id:'brake_ducts',name:'Brake Duct System',cat:'brakes',e:'❄️',base:8500,sl:1,spd:3,rel:8,aero:2,grey:false,desc:'Cooling ducts for brake temperature management'},
-  ecu:{id:'ecu',name:'ECU v7.2',cat:'electronics',e:'💻',base:12000,sl:1,spd:8,rel:10,aero:0,grey:false,desc:'Advanced engine control unit with traction management'},
-  data_logger:{id:'data_logger',name:'Race Data Logger',cat:'electronics',e:'📊',base:9500,sl:1,spd:2,rel:5,aero:0,grey:false,desc:'1000Hz data acquisition system'},
-  tyres_c3:{id:'tyres_c3',name:'Racing Tyres C3 (set)',cat:'tyres',e:'⭕',base:3200,sl:1,spd:8,rel:-5,aero:0,grey:false,desc:'Medium compound slick — balanced pace and wear'},
-  tyres_wet:{id:'tyres_wet',name:'Wet Weather Tyres',cat:'tyres',e:'🌧️',base:2800,sl:1,spd:-2,rel:5,aero:0,grey:false,desc:'Full wet tyres for heavy rain conditions'},
-  fuel_system:{id:'fuel_system',name:'High-Flow Fuel System',cat:'fuel',e:'⛽',base:22000,sl:2,spd:6,rel:10,aero:0,grey:false,desc:'High-pressure fuel delivery system'},
-  fuel_cell_lmp:{id:'fuel_cell_lmp',name:'LMP Fuel Cell System',cat:'fuel',e:'🔋',base:38000,sl:2,spd:8,rel:15,aero:0,grey:false,desc:'FIA-approved safety fuel cell for endurance racing'},
-  grey_aero:{id:'grey_aero',name:'Grey-Market Aero Kit',cat:'aero',e:'⚠️',base:35000,sl:3,spd:22,rel:5,aero:15,grey:true,desc:'Unapproved high-performance aero — HIGH RISK'}
+  formula_engine:{id:'formula_engine',name:'Formula Engine',cat:'engine',base:85000,sl:4,spd:28,rel:15,aero:0,grey:false,desc:'High-revving naturally aspirated V10 formula unit'},
+  mguk:{id:'mguk',name:'MGU-K Hybrid Unit',cat:'engine',base:82000,sl:3,spd:22,rel:8,aero:0,grey:false,desc:'Motor Generator Unit — kinetic energy recovery'},
+  turbo:{id:'turbo',name:'Turbo Assembly',cat:'engine',base:31000,sl:3,spd:18,rel:8,aero:0,grey:false,desc:'Forced induction for endurance and rally classes'},
+  gearbox:{id:'gearbox',name:'Sequential Gearbox',cat:'gearbox',base:45000,sl:4,spd:10,rel:12,aero:0,grey:false,desc:'Racing 7-speed paddle-shift sequential transmission'},
+  front_wing:{id:'front_wing',name:'Carbon Front Wing',cat:'aero',base:28000,sl:2,spd:12,rel:3,aero:10,grey:false,desc:'Full carbon fibre front wing with adjustable flaps'},
+  rear_wing:{id:'rear_wing',name:'Rear Wing Assembly',cat:'aero',base:24000,sl:2,spd:8,rel:3,aero:8,grey:false,desc:'High-downforce rear wing with DRS capability'},
+  diffuser:{id:'diffuser',name:'Carbon Diffuser',cat:'aero',base:19000,sl:2,spd:8,rel:2,aero:7,grey:false,desc:'Rear diffuser for ground-effect downforce generation'},
+  suspension_road:{id:'suspension_road',name:'Road Suspension Kit',cat:'suspension',base:18000,sl:2,spd:8,rel:12,aero:0,grey:false,desc:'Adjustable coilover suspension for circuit racing'},
+  suspension_wrc:{id:'suspension_wrc',name:'WRC Rally Suspension',cat:'suspension',base:26000,sl:2,spd:12,rel:18,aero:0,grey:false,desc:'Long-travel suspension for gravel and snow stages'},
+  brakes_carbon:{id:'brakes_carbon',name:'Carbon Brake System',cat:'brakes',base:14000,sl:2,spd:5,rel:15,aero:0,grey:false,desc:'Carbon-carbon disc and caliper system'},
+  brake_ducts:{id:'brake_ducts',name:'Brake Duct System',cat:'brakes',base:8500,sl:1,spd:3,rel:8,aero:2,grey:false,desc:'Cooling ducts for brake temperature management'},
+  ecu:{id:'ecu',name:'ECU v7.2',cat:'electronics',base:12000,sl:1,spd:8,rel:10,aero:0,grey:false,desc:'Advanced engine control unit with traction management'},
+  data_logger:{id:'data_logger',name:'Race Data Logger',cat:'electronics',base:9500,sl:1,spd:2,rel:5,aero:0,grey:false,desc:'1000Hz data acquisition system'},
+  tyres_c3:{id:'tyres_c3',name:'Racing Tyres C3 (set)',cat:'tyres',base:3200,sl:1,spd:8,rel:-5,aero:0,grey:false,desc:'Medium compound slick — balanced pace and wear'},
+  tyres_wet:{id:'tyres_wet',name:'Wet Weather Tyres',cat:'tyres',base:2800,sl:1,spd:-2,rel:5,aero:0,grey:false,desc:'Full wet tyres for heavy rain conditions'},
+  fuel_system:{id:'fuel_system',name:'High-Flow Fuel System',cat:'fuel',base:22000,sl:2,spd:6,rel:10,aero:0,grey:false,desc:'High-pressure fuel delivery system'},
+  fuel_cell_lmp:{id:'fuel_cell_lmp',name:'LMP Fuel Cell System',cat:'fuel',base:38000,sl:2,spd:8,rel:15,aero:0,grey:false,desc:'FIA-approved safety fuel cell for endurance racing'},
+  grey_aero:{id:'grey_aero',name:'Grey-Market Aero Kit',cat:'aero',base:35000,sl:3,spd:22,rel:5,aero:15,grey:true,desc:'Unapproved high-performance aero — HIGH RISK'}
 };
 
 const CITIES={
@@ -286,26 +417,26 @@ const CITIES={
 };
 
 const RACES={
-  portimao:[{id:'irc_alg',n:'IRC Rally Algarve',disc:'rally',e:'🌿',prize:[8000,5000,3000,1500,500],rival:40,desc:'Tarmac stages through the Algarve mountains'},{id:'gte_port',n:'Portimão GT Enduro',disc:'endurance',e:'🔵',prize:[12000,8000,5000,2000,800],rival:50,desc:'3-hour GT3 endurance race at AIA'}],
-  nurburgring:[{id:'nur_24',n:'Nürburgring 24H',disc:'endurance',e:'🌙',prize:[45000,30000,18000,8000,3000],rival:70,desc:'The legendary 24-hour endurance classic'},{id:'nur_ctc',n:'CTC Nordschleife Round',disc:'touring',e:'🟠',prize:[9000,6000,3500,1500,600],rival:55,desc:'Touring cars on the fearsome Nordschleife'}],
-  silverstone:[{id:'faws_silv',n:'FAWS Grand Prix — Silverstone',disc:'formula',e:'🔴',prize:[55000,38000,22000,10000,5000],rival:75,desc:'The British GP equivalent — maximum prestige'},{id:'gte_silv',n:'Silverstone GT Challenge',disc:'gt',e:'🟣',prize:[14000,9000,5000,2200,900],rival:58,desc:'Gentlemen GT Series on the classic layout'}],
-  sydney:[{id:'v8_syd',n:'V8 Supercars Sydney 500',disc:'touring',e:'🟠',prize:[18000,12000,7000,3000,1200],rival:60,desc:'500km touring classic at Sydney Motorsport Park'},{id:'drg_syd',n:'Sydney Dragway Invitational',disc:'drag',e:'🟡',prize:[6000,4000,2000,800,300],rival:42,desc:'Bracket drag racing at Sydney Dragway'}],
-  maranello:[{id:'faws_mon',n:'FAWS Grand Prix — Monza',disc:'formula',e:'🔴',prize:[52000,36000,20000,9000,4500],rival:72,desc:'High-speed Italian temple of speed'},{id:'gte_ita',n:'Italian GT Championship R2',disc:'gt',e:'🟣',prize:[11000,7500,4000,1800,700],rival:52,desc:'GT3 racing through Italian countryside'}],
-  brackley:[{id:'form_test',n:'FAWS Pre-Season Test',disc:'formula',e:'🔴',prize:[5000,3500,2000,1000,400],rival:35,desc:'Low-stakes test, good for new teams'},{id:'ctc_brand',n:'CTC Brands Hatch',disc:'touring',e:'🟠',prize:[8500,5500,3200,1400,550],rival:48,desc:'Bumper-to-bumper touring car action'}],
-  stuttgart:[{id:'gte_ger',n:'GT Masters Stuttgart',disc:'gt',e:'🟣',prize:[13000,8500,5000,2100,850],rival:56,desc:'Prestigious German GT championship round'},{id:'ctc_ger',n:'CTC Germany',disc:'touring',e:'🟠',prize:[9500,6200,3600,1600,650],rival:54,desc:'DTM-style touring car racing'}],
-  monaco:[{id:'faws_mco',n:'FAWS Monaco Grand Prix',disc:'formula',e:'🔴',prize:[65000,45000,28000,12000,6000],rival:80,desc:'The most prestigious race in the world'},{id:'gte_mco',n:'Monaco GT Classic',disc:'gt',e:'🟣',prize:[20000,13000,8000,3500,1500],rival:65,desc:'GT racing through the famous streets'}],
-  le_mans:[{id:'gea_24h',n:'24 Heures de la Côte',disc:'endurance',e:'🌙',prize:[80000,55000,35000,15000,6000],rival:85,desc:'The legendary 24-hour race — maximum prize'},{id:'gea_6h',n:'GEA 6 Hours of France',disc:'endurance',e:'🔵',prize:[25000,17000,10000,4500,2000],rival:65,desc:'WEC-style 6-hour endurance round'}],
-  dakar:[{id:'irc_dak',n:'Dakar Rally Prologue',disc:'rally',e:'🌿',prize:[15000,10000,6000,2500,1000],rival:62,desc:'Desert rally over dunes and stone terrain'},{id:'afr_rly',n:'Africa Rally Trophy',disc:'rally',e:'🌿',prize:[7000,4500,2500,1100,450],rival:44,desc:'Multi-day rally across the Sahel'}],
-  las_vegas:[{id:'adi_main',n:'Apex Drag Invitational',disc:'drag',e:'🟡',prize:[20000,14000,8000,3200,1200],rival:58,desc:'Top Fuel and Pro Stock at the Strip'},{id:'adi_brk',n:'ADI Bracket Racing',disc:'drag',e:'🟡',prize:[4000,2500,1200,500,200],rival:32,desc:'Street class bracket drag racing'}],
-  sao_paulo:[{id:'faws_bra',n:'FAWS Grand Prix — Brazil',disc:'formula',e:'🔴',prize:[50000,34000,19000,8500,4000],rival:70,desc:'Fan-favourite grand prix in the tropics'},{id:'ctc_bra',n:'Brazilian Touring Cup',disc:'touring',e:'🟠',prize:[7500,5000,2800,1200,500],rival:46,desc:'Hot and humid sprint races in São Paulo'}],
-  tokyo:[{id:'sgt_tok',n:'Super GT Tokyo Round',disc:'gt',e:'🟣',prize:[16000,11000,6500,2800,1100],rival:60,desc:'Precision GT racing at Fuji Speedway'},{id:'drg_tok',n:'Tokyo Drag Battle',disc:'drag',e:'🟡',prize:[5000,3200,1600,700,280],rival:38,desc:'Japanese import drag culture showdown'}],
-  melbourne:[{id:'faws_mel',n:'FAWS Season Opener — Melbourne',disc:'formula',e:'🔴',prize:[53000,37000,21000,9500,4500],rival:73,desc:'The F1 season opener — all eyes on Melbourne'},{id:'gea_mel',n:'Bathurst 12 Hour',disc:'endurance',e:'🔵',prize:[28000,19000,11000,5000,2200],rival:66,desc:'12-hour endurance at the Mountain'}],
-  dubai:[{id:'gea_dub',n:'Dubai 24 Hour',disc:'endurance',e:'🌙',prize:[35000,24000,14000,6000,2500],rival:68,desc:'24-hour endurance under desert lights'},{id:'ctc_dub',n:'Gulf Touring Cup',disc:'touring',e:'🟠',prize:[10000,6800,4000,1700,700],rival:50,desc:'Touring car racing in desert heat'}],
-  novosibirsk:[{id:'irc_snow',n:'IRC Siberian Snow Rally',disc:'rally',e:'🌿',prize:[10000,6800,4000,1700,700],rival:50,desc:'Treacherous snow and ice rally stages'},{id:'irc_grav',n:'Novosibirsk Gravel Sprint',disc:'rally',e:'🌿',prize:[6500,4200,2400,1000,400],rival:38,desc:'Fast gravel stages through Siberian forests'}]
+  portimao:[{id:'irc_alg',n:'IRC Rally Algarve',disc:'rally',prize:[8000,5000,3000,1500,500],rival:40,desc:'Tarmac stages through the Algarve mountains'},{id:'gte_port',n:'Portimão GT Enduro',disc:'endurance',prize:[12000,8000,5000,2000,800],rival:50,desc:'3-hour GT3 endurance race at AIA'}],
+  nurburgring:[{id:'nur_24',n:'Nürburgring 24H',disc:'endurance',prize:[45000,30000,18000,8000,3000],rival:70,desc:'The legendary 24-hour endurance classic on the Nordschleife'},{id:'nur_ctc',n:'CTC Nordschleife Round',disc:'touring',prize:[9000,6000,3500,1500,600],rival:55,desc:'Touring cars on the fearsome Green Hell'}],
+  silverstone:[{id:'faws_silv',n:'FAWS Grand Prix — Silverstone',disc:'formula',prize:[55000,38000,22000,10000,5000],rival:75,desc:'The British GP equivalent — maximum prestige'},{id:'gte_silv',n:'Silverstone GT Challenge',disc:'gt',prize:[14000,9000,5000,2200,900],rival:58,desc:'Gentlemen GT Series on the classic layout'}],
+  sydney:[{id:'v8_syd',n:'V8 Supercars Sydney 500',disc:'touring',prize:[18000,12000,7000,3000,1200],rival:60,desc:'500km touring classic at Sydney Motorsport Park'},{id:'drg_syd',n:'Sydney Dragway Invitational',disc:'drag',prize:[6000,4000,2000,800,300],rival:42,desc:'Bracket drag racing at Sydney Dragway'}],
+  maranello:[{id:'faws_mon',n:'FAWS Grand Prix — Monza',disc:'formula',prize:[52000,36000,20000,9000,4500],rival:72,desc:'High-speed Italian temple of speed'},{id:'gte_ita',n:'Italian GT Championship R2',disc:'gt',prize:[11000,7500,4000,1800,700],rival:52,desc:'GT3 racing through Italian countryside'}],
+  brackley:[{id:'form_test',n:'FAWS Pre-Season Test',disc:'formula',prize:[5000,3500,2000,1000,400],rival:35,desc:'Low-stakes test, good for new teams'},{id:'ctc_brand',n:'CTC Brands Hatch',disc:'touring',prize:[8500,5500,3200,1400,550],rival:48,desc:'Bumper-to-bumper touring car action'}],
+  stuttgart:[{id:'gte_ger',n:'GT Masters Stuttgart',disc:'gt',prize:[13000,8500,5000,2100,850],rival:56,desc:'Prestigious German GT championship round'},{id:'ctc_ger',n:'CTC Germany',disc:'touring',prize:[9500,6200,3600,1600,650],rival:54,desc:'DTM-style touring car racing'}],
+  monaco:[{id:'faws_mco',n:'FAWS Monaco Grand Prix',disc:'formula',prize:[65000,45000,28000,12000,6000],rival:80,desc:'The most prestigious race in the world'},{id:'gte_mco',n:'Monaco GT Classic',disc:'gt',prize:[20000,13000,8000,3500,1500],rival:65,desc:'GT racing through the famous streets'}],
+  le_mans:[{id:'gea_24h',n:'24 Heures de la Côte',disc:'endurance',prize:[80000,55000,35000,15000,6000],rival:85,desc:'The legendary 24-hour race — maximum prize'},{id:'gea_6h',n:'GEA 6 Hours of France',disc:'endurance',prize:[25000,17000,10000,4500,2000],rival:65,desc:'WEC-style 6-hour endurance round'}],
+  dakar:[{id:'irc_dak',n:'Dakar Rally Prologue',disc:'rally',prize:[15000,10000,6000,2500,1000],rival:62,desc:'Desert rally over dunes and stone terrain'},{id:'afr_rly',n:'Africa Rally Trophy',disc:'rally',prize:[7000,4500,2500,1100,450],rival:44,desc:'Multi-day rally across the Sahel'}],
+  las_vegas:[{id:'adi_main',n:'Apex Drag Invitational',disc:'drag',prize:[20000,14000,8000,3200,1200],rival:58,desc:'Top Fuel and Pro Stock at the Strip'},{id:'adi_brk',n:'ADI Bracket Racing',disc:'drag',prize:[4000,2500,1200,500,200],rival:32,desc:'Street class bracket drag racing'}],
+  sao_paulo:[{id:'faws_bra',n:'FAWS Grand Prix — Brazil',disc:'formula',prize:[50000,34000,19000,8500,4000],rival:70,desc:'Fan-favourite grand prix in the tropics'},{id:'ctc_bra',n:'Brazilian Touring Cup',disc:'touring',prize:[7500,5000,2800,1200,500],rival:46,desc:'Hot and humid sprint races in São Paulo'}],
+  tokyo:[{id:'sgt_tok',n:'Super GT Tokyo Round',disc:'gt',prize:[16000,11000,6500,2800,1100],rival:60,desc:'Precision GT racing at Fuji Speedway'},{id:'drg_tok',n:'Tokyo Drag Battle',disc:'drag',prize:[5000,3200,1600,700,280],rival:38,desc:'Japanese import drag culture showdown'}],
+  melbourne:[{id:'faws_mel',n:'FAWS Season Opener — Melbourne',disc:'formula',prize:[53000,37000,21000,9500,4500],rival:73,desc:'The F1 season opener — all eyes on Melbourne'},{id:'gea_mel',n:'Bathurst 12 Hour',disc:'endurance',prize:[28000,19000,11000,5000,2200],rival:66,desc:'12-hour endurance at Mount Panorama'}],
+  dubai:[{id:'gea_dub',n:'Dubai 24 Hour',disc:'endurance',prize:[35000,24000,14000,6000,2500],rival:68,desc:'24-hour endurance under desert lights'},{id:'ctc_dub',n:'Gulf Touring Cup',disc:'touring',prize:[10000,6800,4000,1700,700],rival:50,desc:'Touring car racing in desert heat'}],
+  novosibirsk:[{id:'irc_snow',n:'IRC Siberian Snow Rally',disc:'rally',prize:[10000,6800,4000,1700,700],rival:50,desc:'Treacherous snow and ice rally stages'},{id:'irc_grav',n:'Novosibirsk Gravel Sprint',disc:'rally',prize:[6500,4200,2400,1000,400],rival:38,desc:'Fast gravel stages through Siberian forests'}]
 };
 
 const LENDERS={
-  bank:{name:'Sport Finance Corp',rate:0.0015,rl:'0.15%/wk',limit:500000,risk:'None',color:'var(--info)',note:'Safe government-backed lender'},
+  bank:{name:'Sport Finance Corp',rate:0.0015,rl:'0.15%/wk',limit:500000,risk:'None',color:'var(--info)',note:'Safe institutional creditor'},
   angel:{name:'Angel Investor Syndicate',rate:0.003,rl:'0.30%/wk',limit:2000000,risk:'5% equity',color:'var(--warn)',note:'Takes equity stake — dilutes your ownership'},
   consortium:{name:'The Consortium',rate:0.025,rl:'2.5%/wk',limit:1e9,risk:'Warehouse Raid!',color:'var(--danger)',note:'Miss 2 payments = warehouse seizure!'}
 };
@@ -334,112 +465,96 @@ let G={
   events:[],
   greyOk:false,
   raceHist:[],
-  log:[],
   champ:{pts:0,wins:0},
-  fcat:'all',
-  tab:'market'
+  log:[],
+  tab:'market',fcat:'all'
 };
 
-function uid(){return G.nuid++}
-function cpk(c,p){return c+'|'+p}
+function uid(){return G.nuid++;}
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+function catC(cat){const m={engine:'ce',gearbox:'cg',aero:'ca',suspension:'cs',brakes:'cbr',electronics:'cel',tyres:'cty',fuel:'cfu'};return m[cat]||'';}
+function discD(d){const m={formula:'dform',endurance:'dend',rally:'drally',touring:'dtour',drag:'ddrag',gt:'dgt'};return m[d]||'dform';}
+function discE(d){const m={formula:'🏎️ Formula',endurance:'⏱️ Enduro',rally:'🌲 Rally',touring:'🏁 Touring',drag:'⚡ Drag',gt:'🏆 GT',all:'🌐 Multi'};return m[d]||'🏎️';}
+function condL(c){return c>=80?'Excellent':c>=60?'Good':c>=40?'Worn':c>=20?'Critical':'Failing';}
+function condC(c){return c>=70?'cgood':c>=40?'cok':'cbad';}
+function wcap(){return 30+G.rep*0.2;}
+function wusd(){return G.wh.reduce((s,i)=>s+(PARTS[i.pid]?PARTS[i.pid].sl:1),0);}
+function wval(){return G.wh.reduce((s,i)=>s+getSell(G.city,i.pid,i.cond),0);}
+function tdebt(){return Object.values(G.loans).reduce((a,b)=>a+b,0);}
 
-// ══════════ MARKET ENGINE ══════════
+function carStats(){
+  let spd=20,rel=50,aero=10;
+  G.inst.forEach(it=>{
+    const p=PARTS[it.pid];if(!p)return;
+    const f=it.cond/100;
+    spd+=p.spd*f;rel+=p.rel*f;aero+=p.aero*f;
+  });
+  return{spd:Math.round(spd),rel:Math.max(10,Math.min(99,Math.round(rel))),aero:Math.round(aero)};
+}
+
 function initPrices(){
   Object.keys(CITIES).forEach(cid=>{
+    G.prices[cid]={};
     Object.keys(PARTS).forEach(pid=>{
-      const p=PARTS[pid],city=CITIES[cid];
-      G.prices[cpk(cid,pid)]=Math.round(p.base*(city.mul[p.cat]||1));
+      const p=PARTS[pid],m=CITIES[cid].mul[p.cat]||1;
+      G.prices[cid][pid]=Math.round(p.base*m*(0.9+Math.random()*0.2));
     });
   });
-}
-
-function getPrice(cid,pid){
-  let price=G.prices[cpk(cid,pid)]||PARTS[pid].base;
-  G.events.forEach(ev=>{
-    if(ev.catId&&ev.catId===PARTS[pid].cat)price=Math.round(price*(ev.catMul||1));
-    if(ev.cityId&&ev.cityId===cid)price=Math.round(price*(ev.cityMul||1));
-  });
-  return Math.max(50,price);
-}
-
-function getSell(cid,pid,cond){
-  return Math.round(getPrice(cid,pid)*0.82*(0.5+(cond/100)*0.5));
 }
 
 function updatePrices(){
   Object.keys(CITIES).forEach(cid=>{
     Object.keys(PARTS).forEach(pid=>{
-      const k=cpk(cid,pid),p=PARTS[pid],city=CITIES[cid];
-      const base=p.base*(city.mul[p.cat]||1);
-      const drift=1+(Math.random()-0.5)*0.22;
-      let np=Math.round((G.prices[k]||base)*drift);
-      np=Math.max(Math.round(base*0.55),Math.min(Math.round(base*1.9),np));
-      G.prices[k]=np;
+      const p=PARTS[pid],base=p.base*(CITIES[cid].mul[p.cat]||1);
+      let cur=G.prices[cid][pid]||base;
+      cur=Math.round(cur*(0.88+Math.random()*0.24));
+      G.events.forEach(ev=>{
+        if(ev.cat===p.cat&&ev.catMul)cur=Math.round(cur*ev.catMul);
+        if(ev.city===cid&&ev.cityMul)cur=Math.round(cur*ev.cityMul);
+      });
+      G.prices[cid][pid]=Math.max(Math.round(base*0.35),Math.min(Math.round(base*2.4),cur));
     });
   });
 }
 
+function getPrice(cid,pid){return G.prices[cid]&&G.prices[cid][pid]?G.prices[cid][pid]:PARTS[pid].base;}
+function getSell(cid,pid,cond=100){return Math.round(getPrice(cid,pid)*0.82*(cond/100));}
+
 function fireEvent(){
   const t=EVT_TEMPLATES[Math.floor(Math.random()*EVT_TEMPLATES.length)];
-  if(Math.random()>t.prob*4)return;
-  const cats=Object.keys(CITIES[G.city].mul);
+  const cats=['engine','gearbox','aero','suspension','brakes','electronics','tyres','fuel'];
   const cat=cats[Math.floor(Math.random()*cats.length)];
-  const cids=Object.keys(CITIES);
-  const cid=cids[Math.floor(Math.random()*cids.length)];
-  const ev={
-    id:uid(),
-    msg:t.msg.replace('{cat}',cat).replace('{city}',CITIES[cid].n),
-    catId:t.catMul?cat:null,catMul:t.catMul||1,
-    cityId:t.cityMul?cid:null,cityMul:t.cityMul||1,
-    greyRisk:!!t.greyRisk,dur:t.dur||2
-  };
-  G.events.push(ev);
-  addLog('⚡ EVENT: '+ev.msg,'ev');
-  toast(ev.msg,'w');
+  const cids=Object.keys(CITIES),city=cids[Math.floor(Math.random()*cids.length)];
+  const msg=t.msg.replace('{cat}',cat.toUpperCase()).replace('{city}',CITIES[city].n);
+  const ev={msg,cat,city,catMul:t.catMul||1,cityMul:t.cityMul||1,dur:t.dur};
+  G.events.push(ev);addLog('⚡ EVENT: '+msg,'ev');toast('⚡ '+msg,'w',5000);
 }
 
-// ══════════ CAR STATS ══════════
-function carStats(){
-  let s=0,r=50,a=0;
-  G.inst.forEach(it=>{const p=PARTS[it.pid],cf=it.cond/100;s+=p.spd*cf;r+=p.rel*cf;a+=p.aero*cf;});
-  return{spd:Math.round(s),rel:Math.min(95,Math.round(r)),aero:Math.round(a)};
+function spendAP(cost=1){
+  if(G.ap<cost){toast('Out of Action Points this week! Click END WEEK to advance.','w');return false;}
+  G.ap-=cost;renderHeader();return true;
 }
 
-// ══════════ ACTIONS ══════════
-function spendAP(n=1){if(G.ap<n){toast('Not enough Action Points!','d');return false;}G.ap-=n;return true;}
-function wusd(){return G.wh.reduce((s,i)=>s+(PARTS[i.pid].sl||1),0)}
-function wcap(){return 40}
-function wval(){return G.wh.reduce((s,i)=>s+getSell(G.city,i.pid,i.cond),0)}
-function tdebt(){return G.loans.bank+G.loans.angel+G.loans.consortium}
-function fmt(n){return '$'+Math.abs(Math.round(n)).toLocaleString()}
-function condC(c){return c>=70?'cgood':c>=40?'cok':'cbad'}
-function condL(c){return c>=70?'Good':c>=40?'Fair':c>0?'Worn':'Destroyed'}
-function discD(d){return{formula:'dfo',endurance:'den',rally:'dra',touring:'dto',drag:'ddr',gt:'dgt',all:'dfo'}[d]||'dfo'}
-function discE(d){return{formula:'🔴',endurance:'🔵',rally:'🌿',touring:'🟠',drag:'🟡',gt:'🟣',all:'⚫'}[d]||'⚪'}
-function catC(c){return{engine:'ce',gearbox:'cg',aero:'ca',suspension:'cs',brakes:'cbr',electronics:'cel',tyres:'cty',fuel:'cfu'}[c]||'ce'}
-
-function buyPart(pid,qty){
+function buyPart(pid,qty=1){
   const p=PARTS[pid];
-  if(p.grey&&!G.greyOk){toast('Grey market locked — win a race first!','d');return;}
-  const price=getPrice(G.city,pid),total=price*qty;
-  if(G.cash<total){toast('Not enough cash!','d');return;}
-  if(wusd()+p.sl*qty>wcap()){toast('Warehouse full!','d');return;}
-  G.cash-=total;
+  if(wusd()+p.sl*qty>wcap()){toast('Warehouse full! Need '+(p.sl*qty)+' slots.','d');return;}
+  const price=getPrice(G.city,pid),tot=price*qty;
+  if(G.cash<tot){toast('Need '+fmt(tot)+' — you have '+fmt(G.cash),'d');return;}
+  if(!spendAP(1))return;
+  G.cash-=tot;
   for(let i=0;i<qty;i++)G.wh.push({uid:uid(),pid,cond:100,bp:price,bc:G.city,bw:G.week});
-  addLog('Bought '+qty+'x '+p.name+' @ '+fmt(price)+' in '+CITIES[G.city].n,'g');
-  toast('Bought '+qty+'x '+p.name+' for '+fmt(total),'s');
-  render();
+  addLog('Bought '+qty+'x '+p.name+' for '+fmt(tot)+' in '+CITIES[G.city].n,'g');
+  toast('Purchased '+qty+'x '+p.name,'s');render();
 }
 
 function sellWh(iuid){
   const idx=G.wh.findIndex(i=>i.uid===iuid);if(idx<0)return;
-  const it=G.wh[idx],p=PARTS[it.pid];
-  const sp=getSell(G.city,it.pid,it.cond);
-  G.cash+=sp;G.wh.splice(idx,1);
-  const pl=sp-it.bp;
-  addLog('Sold '+p.name+' for '+fmt(sp)+' (P&L:'+(pl>=0?'+':'')+fmt(pl)+')','g');
-  toast('Sold for '+fmt(sp)+' · P&L:'+(pl>=0?'+':'')+fmt(pl),'s');
-  render();
+  const it=G.wh[idx],sp=getSell(G.city,it.pid,it.cond);
+  if(!spendAP(1))return;
+  G.cash+=sp;const pl=sp-it.bp;G.wh.splice(idx,1);
+  const pls=pl>=0?'+'+fmt(pl):fmt(pl);
+  addLog('Sold '+PARTS[it.pid].name+' for '+fmt(sp)+' ('+pls+') in '+CITIES[G.city].n,pl>=0?'g':'b');
+  toast('Sold for '+fmt(sp)+' ('+pls+')',pl>=0?'s':'i');render();
 }
 
 function installPart(iuid){
@@ -483,7 +598,7 @@ function enterRace(race){
   const prize=race.prize[Math.min(pos-1,race.prize.length-1)]||0;
   const pts=[25,18,15,12,10,8,6,4,2,1][pos-1]||1;
   G.cash+=prize;G.champ.pts+=pts;
-  if(pos===1){G.champ.wins++;if(!G.greyOk){G.greyOk=true;toast('🔓 Grey Market Unlocked — you won your first race!','w',5000);}}
+  if(pos===1){G.champ.wins++;if(!G.greyOk){G.greyOk=true;toast('🔓 Grey Market Unlocked — first race victory!','w',5000);}}
   G.rep=Math.min(100,G.rep+(pos<=3?8:pos<=6?3:-2));
   wearParts(pos<=3?12:pos<=6?18:25);
   G.raceHist.unshift({wk:G.week,n:race.n,d:race.disc,pos,prize,pts});
@@ -514,10 +629,8 @@ function repayLoan(lid,amt){
 }
 
 function endWeek(){
-  // interest
   Object.keys(LENDERS).forEach(l=>{if(G.loans[l]>0)G.loans[l]+=Math.round(G.loans[l]*LENDERS[l].rate);});
   G.cash-=G.wkBase;
-  // consortium check
   if(G.loans.consortium>0&&G.cash<0){
     G.consMiss++;addLog('⚠ Missed Consortium payment!','b');toast('⚠ Missed Consortium payment!','d');
     if(G.consMiss>=2){
@@ -525,7 +638,6 @@ function endWeek(){
       toast('🚨 CONSORTIUM RAID — '+n+' parts seized!','d',6000);addLog('🚨 CONSORTIUM RAID — '+n+' parts seized!','b');
     }
   }else{G.consMiss=0;}
-  // bankruptcy
   if(G.cash+wval()-tdebt()<-80000){
     openModal('💀 Bankruptcy','<p>Your debts have overwhelmed you. The creditors have taken everything.</p><p style="margin-top:10px">Reload to start again.</p>',[{l:'Restart',fn:()=>location.reload(),c:'bcon'}]);return;
   }
@@ -559,19 +671,19 @@ function openModal(title,body,actions){
 function showBuy(pid){
   const p=PARTS[pid],price=getPrice(G.city,pid);
   const base=p.base*(CITIES[G.city].mul[p.cat]||1),diff=price-base,dp=Math.round((diff/base)*100);
-  document.getElementById('mtt').innerHTML=p.e+' '+p.name;
+  document.getElementById('mtt').innerHTML=`<span style="width:24px;height:24px;display:inline-block">${partSvg(pid)}</span> ${p.name}`;
   document.getElementById('mbd').innerHTML=`
-    <div style="font-size:11px;color:var(--dim);margin-bottom:12px">${p.desc}</div>
-    <div style="display:flex;gap:16px;margin-bottom:12px;font-family:var(--font-m)">
-      <div><div style="font-size:9px;color:var(--dim)">BUY PRICE</div><div style="font-size:20px">${fmt(price)}</div></div>
-      <div><div style="font-size:9px;color:var(--dim)">VS BASE</div><div style="font-size:20px;color:${diff>=0?'var(--danger)':'var(--success)'}">${diff>=0?'▲':'▼'}${Math.abs(dp)}%</div></div>
-      <div><div style="font-size:9px;color:var(--dim)">CASH</div><div style="font-size:20px;color:var(--success)">${fmt(G.cash)}</div></div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px">${p.desc}</div>
+    <div style="display:flex;gap:16px;margin-bottom:12px;font-family:var(--font-m);background:var(--surface);padding:10px;border-radius:8px">
+      <div><div style="font-size:9px;color:var(--dim)">BUY PRICE</div><div style="font-size:18px">${fmt(price)}</div></div>
+      <div><div style="font-size:9px;color:var(--dim)">VS BASE</div><div style="font-size:18px;color:${diff>=0?'var(--danger)':'var(--success)'}">${diff>=0?'▲':'▼'}${Math.abs(dp)}%</div></div>
+      <div><div style="font-size:9px;color:var(--dim)">CASH</div><div style="font-size:18px;color:var(--success)">${fmt(G.cash)}</div></div>
     </div>
-    <div style="font-size:11px;color:var(--dim);margin-bottom:8px">Stats: ⚡+${p.spd} 🛡${p.rel>=0?'+':''}${p.rel} 🛩+${p.aero} · ${p.sl} slots</div>
+    <div style="font-size:11px;color:var(--dim);margin-bottom:8px">Performance: ⚡+${p.spd} Spd · 🛡${p.rel>=0?'+':''}${p.rel} Rel · 🛩+${p.aero} Aero · ${p.sl} slots</div>
     <label style="font-size:11px;color:var(--dim);display:block;margin-bottom:4px">Quantity:</label>
     <input type="number" class="mi" id="bqty" value="1" min="1" max="10">
-    <div id="btot" style="font-family:var(--font-m);font-size:14px;color:var(--success)">Total: ${fmt(price)}</div>
-    ${p.grey?'<div style="color:var(--warn);font-size:11px;margin-top:7px">⚠ Grey market — FIA inspection risk</div>':''}`;
+    <div id="btot" style="font-family:var(--font-m);font-size:15px;color:var(--success)">Total: ${fmt(price)}</div>
+    ${p.grey?'<div style="color:var(--warn);font-size:11px;margin-top:8px;padding:6px;background:rgba(255,149,0,0.1);border-radius:6px">⚠ Grey market component — FIA scrutiny penalty risk</div>':''}`;
   document.getElementById('bqty').oninput=function(){document.getElementById('btot').textContent='Total: '+fmt(price*(parseInt(this.value)||1));};
   const mac=document.getElementById('mac');mac.innerHTML='';
   const cb=document.createElement('button');cb.className='bcan';cb.textContent='Cancel';cb.onclick=closeModal;
@@ -583,11 +695,11 @@ function showBuy(pid){
 
 function showLoan(lid){
   const info=LENDERS[lid],bal=G.loans[lid];
-  document.getElementById('mtt').innerHTML='💵 '+info.name;
+  document.getElementById('mtt').innerHTML=`<span style="color:${info.color}">💳</span> ${info.name}`;
   document.getElementById('mbd').innerHTML=`
     <div style="line-height:1.8;margin-bottom:12px">Rate: <strong>${info.rl}</strong> &nbsp;|&nbsp; Risk: <strong style="color:${info.color}">${info.risk}</strong><br>
     <span style="font-size:11px;color:var(--dim)">${info.note}</span><br>Balance: <strong style="font-family:var(--font-m)">${fmt(bal)}</strong></div>
-    ${lid==='consortium'?'<div style="color:var(--danger);font-size:11px;padding:7px 11px;border:1px solid var(--danger);border-radius:6px;margin-bottom:10px">⚠ Miss 2 weekly payments → warehouse raid!</div>':''}
+    ${lid==='consortium'?'<div style="color:var(--danger);font-size:11px;padding:8px 12px;border:1px solid var(--danger);border-radius:6px;margin-bottom:10px;background:rgba(230,57,70,0.08)">⚠ Warning: Two consecutive missed payments trigger a physical raid on your parts warehouse!</div>':''}
     <label style="font-size:11px;color:var(--dim);display:block;margin-bottom:4px">Amount:</label>
     <input type="number" class="mi" id="lamt" value="10000" min="1000" step="1000">`;
   const mac=document.getElementById('mac');mac.innerHTML='';
@@ -601,14 +713,18 @@ function showLoan(lid){
 
 function showRaceResult(race,result){
   const pc=result.pos===1?'var(--gold)':result.pos===2?'var(--silver)':result.pos===3?'var(--bronze)':result.pos==='DNF'?'var(--danger)':'var(--text)';
-  document.getElementById('mtt').innerHTML=race.e+' '+race.n;
+  document.getElementById('mtt').innerHTML=`<img src="assets/vectors/flag_crossed.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> ${race.n}`;
   document.getElementById('mbd').innerHTML=`
+    <div style="text-align:center;margin-bottom:14px">
+      ${result.pos<=3?`<img src="assets/vectors/trophy_gold.jpg" style="width:70px;height:70px;margin:0 auto 8px;display:block">`:''}
+      <div style="font-size:13px;color:var(--dim)">Grand Prix Classified Result</div>
+    </div>
     <div class="rg">
       <div class="rs"><div class="rv" style="color:${pc}">${result.pos==='DNF'?'DNF':'P'+result.pos}</div><div class="rl">Position</div></div>
       <div class="rs"><div class="rv" style="color:var(--success)">${fmt(result.prize)}</div><div class="rl">Prize Money</div></div>
       <div class="rs"><div class="rv" style="color:var(--drag)">${result.pts}pts</div><div class="rl">Champ Points</div></div>
     </div>
-    <div style="font-size:12px;color:var(--dim);margin-top:6px">Parts worn from race use — check your Garage!</div>`;
+    <div style="font-size:12px;color:var(--dim);margin-top:8px;text-align:center">Parts worn down from high-speed racing stresses — inspect your Garage!</div>`;
   const mac=document.getElementById('mac');mac.innerHTML='';
   const cb=document.createElement('button');cb.className='bcon';cb.textContent='Continue';cb.onclick=closeModal;mac.appendChild(cb);
   document.getElementById('mo').classList.add('open');
@@ -634,69 +750,166 @@ function renderHeader(){
 function renderMarket(){
   const city=CITIES[G.city];
   const cats=['all','engine','gearbox','aero','suspension','brakes','electronics','tyres','fuel'];
-  const catN={all:'All',engine:'Engine',gearbox:'Gearbox',aero:'Aero',suspension:'Suspension',brakes:'Brakes',electronics:'Electronics',tyres:'Tyres',fuel:'Fuel'};
+  const catN={all:'All Parts',engine:'Engines',gearbox:'Gearboxes',aero:'Aerodynamics',suspension:'Suspensions',brakes:'Brakes',electronics:'Electronics',tyres:'Tyres',fuel:'Fuel Systems'};
   const parts=Object.values(PARTS).filter(p=>!(p.grey&&!G.greyOk)&&(G.fcat==='all'||p.cat===G.fcat));
-  const evHtml=G.events.length?`<div class="ib">⚡ <strong>${G.events.length} active event${G.events.length>1?'s':''}:</strong> ${G.events.map(e=>e.msg+' ('+e.dur+'w)').join(' · ')}</div>`:'';
+  const evHtml=G.events.length?`<div class="ib">⚡ <strong>${G.events.length} active global event${G.events.length>1?'s':''}:</strong> ${G.events.map(e=>e.msg+' ('+e.dur+'w)').join(' · ')}</div>`:'';
+  
   document.getElementById('tab-market').innerHTML=`
-    <div class="ph"><div><div class="pt">📈 Parts Market — ${city.n}</div><div class="ps">${city.spec} · ${city.desc}</div></div>
-    <div style="font-size:11px;color:var(--dim);text-align:right">Warehouse: <strong style="font-family:var(--font-m)">${wusd()}/${wcap()}</strong> slots used<br>${city.grey&&G.greyOk?'<span style="color:var(--warn)">⚠ Grey market here</span>':''}</div></div>
+    <div class="hero-banner">
+      <img src="assets/vectors/racing_flag.jpg" class="hero-bg" alt="Racing background">
+      <div class="hero-grad"></div>
+      <div class="hero-content">
+        <div class="hero-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 2v20M2 12h20"/></svg>
+          Paddock Exchange
+        </div>
+        <div class="hero-title">${city.f} ${city.n} Component Exchange</div>
+        <div class="hero-desc">${city.spec} · ${city.desc}</div>
+      </div>
+      <div class="hero-side">
+        <div style="background:rgba(21,21,36,0.85);border:1px solid var(--border);border-radius:8px;padding:8px 12px;text-align:right">
+          <div style="font-size:9px;color:var(--dim);text-transform:uppercase">Warehouse Capacity</div>
+          <div style="font-family:var(--font-m);font-size:15px;font-weight:600">${wusd()} / ${wcap()} <span style="font-size:11px;color:var(--dim)">slots</span></div>
+        </div>
+      </div>
+    </div>
     ${evHtml}
     <div class="mc">${cats.map(c=>`<button class="fb${G.fcat===c?' a':''}" onclick="G.fcat='${c}';renderMarket()">${catN[c]}</button>`).join('')}</div>
-    <table class="mtbl"><thead><tr><th>Part</th><th>Cat</th><th>Price Here</th><th>Sell Price</th><th>Owned</th><th></th></tr></thead>
-    <tbody>${parts.map(p=>{
-      const price=getPrice(G.city,p.id),base=p.base*(city.mul[p.cat]||1),diff=price-base,dp=Math.round((diff/base)*100);
-      const pc=diff>base*0.05?'pu':diff<-base*0.05?'pd2':'pn2';
-      const sp=getSell(G.city,p.id,100),owned=G.wh.filter(i=>i.pid===p.id).length,can=G.cash>=price;
-      return`<tr><td><div class="pn">${p.e} ${p.name}${p.grey?` <span class="gtag">⚠ GREY</span>`:''}</div><div class="pd">⚡+${p.spd} 🛡${p.rel>=0?'+':''}${p.rel} 🛩+${p.aero} · ${p.sl}sl</div></td>
-      <td><span class="cb ${catC(p.cat)}">${p.cat.toUpperCase()}</span></td>
-      <td><span class="pc ${pc}">${fmt(price)}</span> <span style="font-size:10px;color:${dp>=0?'var(--danger)':'var(--success)'}">${dp>=0?'▲':'▼'}${Math.abs(dp)}%</span></td>
-      <td class="pc" style="color:var(--dim)">${fmt(sp)}</td><td class="sn">${owned}</td>
-      <td>${can?`<button class="bbuy" onclick="showBuy('${p.id}')">BUY</button>`:`<button class="bdis">BUY</button>`}</td></tr>`;
-    }).join('')}</tbody></table>
-    <div style="margin-top:16px"><div class="ct">📡 Global Price Intel</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:6px">
-    ${Object.values(CITIES).map(c=>{
-      const bp=Object.values(PARTS).filter(p=>!p.grey).sort((a,b)=>getPrice(c.id,a.id)/a.base-getPrice(c.id,b.id)/b.base)[0];
-      const cp=getPrice(c.id,bp.id),cpc=Math.round(((cp-bp.base)/bp.base)*100);
-      return`<div style="padding:6px 9px;background:var(--panel);border:1px solid var(--border);border-radius:7px;font-size:11px">${c.f} <strong>${c.n}</strong><br><span style="color:var(--dim)">Best: </span><span style="color:var(--success)">${bp.name.slice(0,16)} ${cpc<0?cpc+'%':'+'+cpc+'%'}</span></div>`;
-    }).join('')}</div></div>`;
+    <table class="mtbl">
+      <thead><tr><th>Part Description</th><th>Category</th><th>Local Buy Price</th><th>Local Sell</th><th>Warehouse</th><th>Action</th></tr></thead>
+      <tbody>${parts.map(p=>{
+        const price=getPrice(G.city,p.id),base=p.base*(city.mul[p.cat]||1),diff=price-base,dp=Math.round((diff/base)*100);
+        const pc=diff>base*0.05?'pu':diff<-base*0.05?'pd2':'pn2';
+        const sp=getSell(G.city,p.id,100),owned=G.wh.filter(i=>i.pid===p.id).length,can=G.cash>=price;
+        return`<tr>
+          <td>
+            <div class="pcell">
+              <div class="pico-wrap" style="color:var(--${p.cat==='engine'?'formula':p.cat==='aero'?'endurance':p.cat==='suspension'?'rally':p.cat==='brakes'?'touring':p.cat==='electronics'?'drag':p.cat==='tyres'?'gt':'info'})">
+                ${partSvg(p.id)}
+              </div>
+              <div>
+                <div class="pn">${p.name}${p.grey?` <span class="gtag">⚠ GREY</span>`:''}</div>
+                <div class="pd">⚡+${p.spd} Spd · 🛡${p.rel>=0?'+':''}${p.rel} Rel · 🛩+${p.aero} Aero · ${p.sl} slots</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="cb ${catC(p.cat)}">${p.cat.toUpperCase()}</span></td>
+          <td><span class="pc ${pc}">${fmt(price)}</span> <span style="font-size:10px;color:${dp>=0?'var(--danger)':'var(--success)'}">${dp>=0?'▲':'▼'}${Math.abs(dp)}%</span></td>
+          <td class="pc" style="color:var(--dim)">${fmt(sp)}</td>
+          <td class="sn">${owned}</td>
+          <td>${can?`<button class="bbuy" onclick="showBuy('${p.id}')">BUY</button>`:`<button class="bdis">BUY</button>`}</td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table>
+    <div style="margin-top:20px">
+      <div class="ct">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        Global Parts Intelligence
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:8px">
+        ${Object.values(CITIES).map(c=>{
+          const bp=Object.values(PARTS).filter(p=>!p.grey).sort((a,b)=>getPrice(c.id,a.id)/a.base-getPrice(c.id,b.id)/b.base)[0];
+          const cp=getPrice(c.id,bp.id),cpc=Math.round(((cp-bp.base)/bp.base)*100);
+          return`<div style="padding:8px 10px;background:var(--panel);border:1px solid var(--border);border-radius:8px;font-size:11px">
+            <div style="font-weight:600">${c.f} ${c.n}</div>
+            <div style="color:var(--dim);margin-top:2px">Glut: <span style="color:var(--success)">${bp.name.slice(0,14)} ${cpc<0?cpc+'%':'+'+cpc+'%'}</span></div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
 }
 
 function renderGarage(){
   const st=carStats();
   document.getElementById('tab-garage').innerHTML=`
-    <div class="ph"><div><div class="pt">🏎️ Garage — Your Car</div><div class="ps">Installed parts and performance monitor</div></div></div>
-    <div class="cstats">
-      <div class="sc"><div class="sn2">⚡ Speed</div><div class="sv">${st.spd}</div><div class="sb"><div class="sf fspd" style="width:${Math.min(100,st.spd)}%"></div></div></div>
-      <div class="sc"><div class="sn2">🛡 Reliability</div><div class="sv">${st.rel}%</div><div class="sb"><div class="sf frel" style="width:${st.rel}%"></div></div></div>
-      <div class="sc"><div class="sn2">🛩 Aerodynamics</div><div class="sv">${st.aero}</div><div class="sb"><div class="sf faero" style="width:${Math.min(100,st.aero*2)}%"></div></div></div>
+    <div class="hero-banner">
+      <img src="assets/vectors/pit_stop_crew.jpg" class="hero-bg" alt="Pit Stop Crew">
+      <div class="hero-grad"></div>
+      <div class="hero-content">
+        <div class="hero-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Pit Lane Engineering Bay
+        </div>
+        <div class="hero-title">Vehicle Setup & Telemetry Diagnostics</div>
+        <div class="hero-desc">Calibrate installed components to maximize track velocity while avoiding catastrophic DNF mechanical failure.</div>
+      </div>
     </div>
-    ${G.inst.length===0?`<div class="empty"><div class="eico">🔧</div>No parts installed. Go to <strong>Warehouse</strong> to install parts from inventory.</div>`:`
-    <div class="ct">Installed Parts (${G.inst.length})</div>
+    <div class="cstats">
+      <div class="sc">
+        <div class="sn2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Speed Metric
+        </div>
+        <div class="sv" style="color:var(--info)">${st.spd}</div>
+        <div class="sb"><div class="sf fspd" style="width:${Math.min(100,st.spd)}%"></div></div>
+      </div>
+      <div class="sc">
+        <div class="sn2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Reliability (Anti-DNF)
+        </div>
+        <div class="sv" style="color:var(--success)">${st.rel}%</div>
+        <div class="sb"><div class="sf frel" style="width:${st.rel}%"></div></div>
+      </div>
+      <div class="sc">
+        <div class="sn2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+          Aero Downforce
+        </div>
+        <div class="sv" style="color:var(--gt)">${st.aero}</div>
+        <div class="sb"><div class="sf faero" style="width:${Math.min(100,st.aero*2)}%"></div></div>
+      </div>
+    </div>
+    ${G.inst.length===0?`<div class="empty"><div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>No components installed in chassis. Head to <strong>Warehouse</strong> to mount parts.</div>`:`
+    <div class="ct">Chassis Mounted Components (${G.inst.length})</div>
     <div class="pgrid">${G.inst.map(it=>{
       const p=PARTS[it.pid],cc=condC(it.cond);
       return`<div class="pcard${p.grey?' gp':''}">
-        <div class="pct"><div><div class="pcn">${p.e} ${p.name}</div><span class="cb ${catC(p.cat)}" style="font-size:9px">${p.cat.toUpperCase()}</span></div>
-        <div style="text-align:right;font-size:11px;color:var(--dim)">${condL(it.cond)}<br><span style="font-size:13px;color:${it.cond>=70?'var(--success)':it.cond>=40?'var(--warn)':'var(--danger)'}">${it.cond}%</span></div></div>
+        <div class="pct">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="pico-wrap" style="color:var(--formula)">${partSvg(p.id)}</div>
+            <div>
+              <div class="pcn">${p.name}</div>
+              <span class="cb ${catC(p.cat)}" style="font-size:9px">${p.cat.toUpperCase()}</span>
+            </div>
+          </div>
+          <div style="text-align:right;font-size:11px;color:var(--dim)">${condL(it.cond)}<br><span style="font-size:13px;color:${it.cond>=70?'var(--success)':it.cond>=40?'var(--warn)':'var(--danger)'}">${it.cond}%</span></div>
+        </div>
         <div class="cbar"><div class="cfil ${cc}" style="width:${it.cond}%"></div></div>
         <div class="pst"><span>⚡<span style="color:var(--text)">+${p.spd}</span></span><span>🛡<span style="color:var(--text)">${p.rel>=0?'+':''}${p.rel}</span></span><span>🛩<span style="color:var(--text)">+${p.aero}</span></span></div>
-        <div class="pacts"><button class="bsm buns" onclick="uninstall(${it.uid})">Uninstall</button>${it.cond<50?'<span style="font-size:10px;color:var(--danger);padding:3px">⚠ Worn</span>':''}</div>
+        <div class="pacts"><button class="bsm buns" onclick="uninstall(${it.uid})">Uninstall</button>${it.cond<50?'<span style="font-size:10px;color:var(--danger);padding:3px">⚠ Worn Condition</span>':''}</div>
       </div>`;
     }).join('')}</div>`}`;
 }
 
 function renderWarehouse(){
   document.getElementById('tab-warehouse').innerHTML=`
-    <div class="ph"><div><div class="pt">📦 Warehouse</div><div class="ps">${wusd()}/${wcap()} slots used · Est. value: ${fmt(wval())}</div></div></div>
-    ${G.wh.length===0?`<div class="empty"><div class="eico">📦</div>Warehouse empty. Visit <strong>Market</strong> to buy parts.</div>`:`
+    <div class="ph">
+      <div>
+        <div class="pt">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M10 4v16"/></svg>
+          Paddock Warehouse & Storage
+        </div>
+        <div class="ps">${wusd()}/${wcap()} slots utilized · Inventory liquidation value: ${fmt(wval())}</div>
+      </div>
+    </div>
+    ${G.wh.length===0?`<div class="empty"><div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M10 4v16"/></svg></div>Warehouse storage bay is empty. Visit the <strong>Market</strong> to buy components.</div>`:`
     <div class="pgrid">${G.wh.map(it=>{
       const p=PARTS[it.pid],cc=condC(it.cond),sp=getSell(G.city,it.pid,it.cond),pl=sp-it.bp;
       return`<div class="pcard${p.grey?' gp':''}">
-        <div class="pct"><div><div class="pcn">${p.e} ${p.name}</div><span class="cb ${catC(p.cat)}" style="font-size:9px">${p.cat.toUpperCase()}</span></div>
-        <div style="text-align:right;font-size:11px;color:var(--dim)">${condL(it.cond)}<br><span style="font-size:13px;color:${it.cond>=70?'var(--success)':it.cond>=40?'var(--warn)':'var(--danger)'}">${it.cond}%</span></div></div>
+        <div class="pct">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="pico-wrap" style="color:var(--info)">${partSvg(p.id)}</div>
+            <div>
+              <div class="pcn">${p.name}</div>
+              <span class="cb ${catC(p.cat)}" style="font-size:9px">${p.cat.toUpperCase()}</span>
+            </div>
+          </div>
+          <div style="text-align:right;font-size:11px;color:var(--dim)">${condL(it.cond)}<br><span style="font-size:13px;color:${it.cond>=70?'var(--success)':it.cond>=40?'var(--warn)':'var(--danger)'}">${it.cond}%</span></div>
+        </div>
         <div class="cbar"><div class="cfil ${cc}" style="width:${it.cond}%"></div></div>
-        <div class="pst"><span>Paid:<span style="color:var(--text)">${it.bp>0?fmt(it.bp):'—'}</span></span><span>Sell:<span style="color:var(--text)">${fmt(sp)}</span></span><span style="color:${pl>=0?'var(--success)':'var(--danger)'}">${pl>=0?'▲':'▼'}${fmt(Math.abs(pl))}</span></div>
-        <div style="font-size:10px;color:var(--dim);margin-bottom:7px">${it.bc&&CITIES[it.bc]?CITIES[it.bc].n:'—'} · Wk${it.bw||'—'}</div>
+        <div class="pst"><span>Paid: <span style="color:var(--text)">${it.bp>0?fmt(it.bp):'—'}</span></span><span>Sell: <span style="color:var(--text)">${fmt(sp)}</span></span><span style="color:${pl>=0?'var(--success)':'var(--danger)'}">${pl>=0?'▲':'▼'}${fmt(Math.abs(pl))}</span></div>
+        <div style="font-size:10px;color:var(--dim);margin-bottom:8px">Origin: ${it.bc&&CITIES[it.bc]?CITIES[it.bc].n:'—'} · Acquired Wk ${it.bw||'—'}</div>
         <div class="pacts"><button class="bsm bins" onclick="installPart(${it.uid})">Install</button><button class="bsm bssp" onclick="sellWh(${it.uid})">Sell ${fmt(sp)}</button></div>
       </div>`;
     }).join('')}</div>`}`;
@@ -705,73 +918,95 @@ function renderWarehouse(){
 function renderFinance(){
   const wkI=Object.keys(LENDERS).reduce((s,l)=>s+Math.round(G.loans[l]*LENDERS[l].rate),0),twk=G.wkBase+wkI,d=tdebt();
   document.getElementById('tab-finance').innerHTML=`
-    <div class="ph"><div class="pt">💰 Finance Office</div></div>
+    <div class="ph"><div class="pt"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v12M15 9.5a2.5 2.5 0 0 0-5 0c0 3 5 2 5 5a2.5 2.5 0 0 1-5 0"/></svg> Team Financial Office</div></div>
     <div class="fgrid">
-      <div class="fc"><div class="fl">Cash on Hand</div><div class="fv ${G.cash>=0?'pos':'neg'}">${fmt(G.cash)}</div></div>
-      <div class="fc"><div class="fl">Parts Value</div><div class="fv pos">${fmt(wval())}</div></div>
-      <div class="fc"><div class="fl">Total Debt</div><div class="fv ${d>0?'neg':'pos'}">${fmt(d)}</div></div>
-      <div class="fc"><div class="fl">Net Worth</div><div class="fv ${G.cash+wval()-d>=0?'pos':'neg'}">${fmt(G.cash+wval()-d)}</div></div>
-      <div class="fc"><div class="fl">Weekly Costs</div><div class="fv wrn">${fmt(twk)}</div></div>
-      <div class="fc"><div class="fl">Champ Points</div><div class="fv" style="color:var(--drag)">${G.champ.pts}</div></div>
+      <div class="fc"><div class="fl">Cash Liquidity</div><div class="fv ${G.cash>=0?'pos':'neg'}">${fmt(G.cash)}</div></div>
+      <div class="fc"><div class="fl">Inventory Valuation</div><div class="fv pos">${fmt(wval())}</div></div>
+      <div class="fc"><div class="fl">Outstanding Debt</div><div class="fv ${d>0?'neg':'pos'}">${fmt(d)}</div></div>
+      <div class="fc"><div class="fl">Net Syndicate Worth</div><div class="fv ${G.cash+wval()-d>=0?'pos':'neg'}">${fmt(G.cash+wval()-d)}</div></div>
+      <div class="fc"><div class="fl">Weekly Upkeep</div><div class="fv wrn">${fmt(twk)}</div></div>
+      <div class="fc"><div class="fl">Championship Trophy Pts</div><div class="fv" style="color:var(--drag)">${G.champ.pts}</div></div>
     </div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px">Weekly: base ops ${fmt(G.wkBase)} + loan interest ${fmt(wkI)} = <strong style="color:var(--text)">${fmt(twk)}/week</strong></div>
-    <div class="ct">🏦 Lenders</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:18px">Recurring deductions: base operations ${fmt(G.wkBase)} + lender interest ${fmt(wkI)} = <strong style="color:var(--text)">${fmt(twk)}/week</strong></div>
+    <div class="ct">Creditors & Lenders</div>
     ${Object.entries(LENDERS).map(([lid,info])=>{const bal=G.loans[lid];return`
     <div class="lrow${lid==='consortium'&&bal>0?' consd':''}">
-      <div style="flex:1"><div class="lname" style="color:${info.color}">${info.name}</div><div class="ldet">Rate: ${info.rl} · Risk: ${info.risk} · ${info.note}</div></div>
+      <div style="flex:1">
+        <div class="lname" style="color:${info.color}">${info.name}</div>
+        <div class="ldet">Interest: ${info.rl} · Risk Terms: ${info.risk} · ${info.note}</div>
+      </div>
       <div class="lbal" style="color:${bal>0?'var(--danger)':'var(--success)'}">${fmt(bal)}</div>
-      <div class="lacts"><button class="bbrw" onclick="showLoan('${lid}')">Manage</button></div>
+      <div class="lacts"><button class="bbrw" onclick="showLoan('${lid}')">Manage Loan</button></div>
     </div>`;}).join('')}
     <div class="sep"></div>
-    <div class="ct">📋 Event Log</div>
-    <div class="elog">${G.log.map(e=>`<div class="lent${e.cls?' l'+e.cls:''}"><span class="wt">W${e.wk}</span>${e.msg}</div>`).join('')}${G.log.length===0?'<div class="empty" style="padding:18px">No events yet</div>':''}</div>`;
+    <div class="ct">Paddock Ledger & Events Log</div>
+    <div class="elog">${G.log.map(e=>`<div class="lent${e.cls?' l'+e.cls:''}"><span class="wt">W${e.wk}</span>${e.msg}</div>`).join('')}${G.log.length===0?'<div class="empty" style="padding:18px">No ledger entries logged yet</div>':''}</div>`;
 }
 
 function renderRace(){
   const city=CITIES[G.city],st=carStats(),races=RACES[G.city]||[];
+  const isSpecial = city.id === 'monaco' || city.id === 'nurburgring' || city.id === 'le_mans';
+  
   document.getElementById('tab-race').innerHTML=`
-    <div class="ph"><div><div class="pt">🏁 Race Centre — ${city.n}</div><div class="ps">Each entry costs 1 Action Point</div></div></div>
+    <div class="hero-banner">
+      <img src="${isSpecial ? 'assets/vectors/formula_vintage.jpg' : 'assets/vectors/racing_flag.jpg'}" class="hero-bg" alt="Grand Prix">
+      <div class="hero-grad"></div>
+      <div class="hero-content">
+        <div class="hero-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4v16M4 4h12l-2 4 2 4H4"/></svg>
+          FIA Sanctioned Events
+        </div>
+        <div class="hero-title">${city.f} ${city.n} Race Schedule</div>
+        <div class="hero-desc">Enter competitive motorsport heats across open wheel, endurance, GT, touring and drag classes. 1 Action Point required per race entry.</div>
+      </div>
+    </div>
     <div class="rhdr">
-      <div class="rcp"><div class="ct" style="margin-bottom:10px">Your Car Performance</div>
-        <div style="display:flex;gap:16px;font-family:var(--font-m)">
+      <div class="rcp">
+        <div class="ct" style="margin-bottom:10px">Current Car Readiness</div>
+        <div style="display:flex;gap:18px;font-family:var(--font-m)">
           <div><div style="font-size:9px;color:var(--dim)">SPEED</div><div style="font-size:24px;color:var(--info)">${st.spd}</div></div>
           <div><div style="font-size:9px;color:var(--dim)">RELIABILITY</div><div style="font-size:24px;color:var(--success)">${st.rel}%</div></div>
           <div><div style="font-size:9px;color:var(--dim)">AERO</div><div style="font-size:24px;color:var(--gt)">${st.aero}</div></div>
         </div>
-        ${st.rel<55?'<div style="color:var(--danger);font-size:11px;margin-top:8px">⚠ Low reliability — DNF risk HIGH. Buy better parts!</div>':''}
+        ${st.rel<55?'<div style="color:var(--danger);font-size:11px;margin-top:8px">⚠ Low reliability warning — extreme DNF breakdown hazard. Replace worn parts!</div>':''}
       </div>
-      <div class="rcp"><div class="ct" style="margin-bottom:10px">Season ${G.season} Stats</div>
-        <div style="display:flex;gap:16px;font-family:var(--font-m)">
+      <div class="rcp">
+        <div class="ct" style="margin-bottom:10px">Season ${G.season} Standing</div>
+        <div style="display:flex;gap:18px;font-family:var(--font-m)">
           <div><div style="font-size:9px;color:var(--dim)">POINTS</div><div style="font-size:24px;color:var(--drag)">${G.champ.pts}</div></div>
           <div><div style="font-size:9px;color:var(--dim)">WINS</div><div style="font-size:24px;color:var(--gold)">${G.champ.wins}</div></div>
           <div><div style="font-size:9px;color:var(--dim)">RACES</div><div style="font-size:24px">${G.raceHist.length}</div></div>
-          <div><div style="font-size:9px;color:var(--dim)">REP</div><div style="font-size:24px;color:var(--info)">${G.rep}</div></div>
+          <div><div style="font-size:9px;color:var(--dim)">REPUTATION</div><div style="font-size:24px;color:var(--info)">${G.rep}</div></div>
         </div>
       </div>
     </div>
-    <div class="ct">Available Races in ${city.n}</div>
-    ${races.length===0?`<div class="empty"><div class="eico">🏁</div>No races here. Travel to a race venue to compete.</div>`:''}
+    <div class="ct">Available Competitions in ${city.n}</div>
+    ${races.length===0?`<div class="empty"><div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v16M4 4h12l-2 4 2 4H4"/></svg></div>No sanctioned events held in this hub. Travel to an active circuit.</div>`:''}
     <div class="rlist">${races.map(race=>{
       const sc=st.spd+st.aero*0.4,diff=Math.round(sc-race.rival);
       const ac=diff>10?'var(--success)':diff>-10?'var(--warn)':'var(--danger)';
-      const al=diff>15?'STRONG FAV':diff>0?'SLIGHT FAV':diff>-15?'EVEN MATCH':'UNDERDOG';
+      const al=diff>15?'STRONG FAVOURITE':diff>0?'SLIGHT FAVOURITE':diff>-15?'EVEN MATCH':'UNDERDOG';
       return`<div class="rcard">
-        <div class="rdb ${discD(race.disc)}">${discE(race.disc)}</div>
-        <div class="ri"><div class="rn">${race.n}</div>
-          <div class="rdt">${race.desc} · Rivals: <span style="color:${race.rival>70?'var(--danger)':race.rival>50?'var(--warn)':'var(--success)'}">${race.rival}/100</span></div>
-          <div style="font-size:11px;margin-top:3px">vs field: <span style="color:${ac};font-weight:700">${al}</span></div>
+        <div class="rdb ${discD(race.disc)}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v16M4 4h12l-2 4 2 4H4"/></svg>
+        </div>
+        <div class="ri">
+          <div class="rn">${race.n}</div>
+          <div class="rdt">${race.desc} · Field Competitiveness: <span style="color:${race.rival>70?'var(--danger)':race.rival>50?'var(--warn)':'var(--success)'}">${race.rival}/100</span></div>
+          <div style="font-size:11px;margin-top:3px">Odds vs Paddock: <span style="color:${ac};font-weight:700">${al}</span></div>
         </div>
         <div style="text-align:right">
-          <div class="rp">${fmt(race.prize[0])} <span style="font-size:10px;color:var(--dim)">1st</span></div>
-          <div style="font-size:10px;color:var(--dim);margin-top:2px">1 AP cost</div>
-          <button class="benter" style="margin-top:7px" onclick="enterRaceById('${race.id}','${G.city}')">ENTER RACE</button>
+          <div class="rp">${fmt(race.prize[0])} <span style="font-size:10px;color:var(--dim)">1st Prize</span></div>
+          <div style="font-size:10px;color:var(--dim);margin-top:2px">1 AP entry</div>
+          <button class="benter" style="margin-top:7px" onclick="enterRaceById('${race.id}','${G.city}')">START RACE</button>
         </div>
       </div>`;
     }).join('')}</div>
-    ${G.raceHist.length>0?`<div class="sep"></div><div class="ct">Recent Results</div>
+    ${G.raceHist.length>0?`<div class="sep"></div><div class="ct">Paddock Race History</div>
     <div class="rhist">${G.raceHist.slice(0,8).map(r=>{
       const pc=r.pos===1?'p1':r.pos===2?'p2':r.pos===3?'p3':r.pos==='DNF'?'pdnf':'poth';
-      return`<div class="hrow"><div class="pb ${pc}">${r.pos==='DNF'?'✗':r.pos}</div>
+      return`<div class="hrow">
+        <div class="pb ${pc}">${r.pos==='DNF'?'✗':r.pos}</div>
         <div style="flex:1"><div style="font-size:12px;font-weight:600">${r.n}</div><div style="font-size:10px;color:var(--dim)">Week ${r.wk}</div></div>
         <div style="font-family:var(--font-m);color:var(--success);font-size:12px">${r.prize>0?fmt(r.prize):'—'}</div>
         <div style="font-family:var(--font-m);color:var(--drag);font-size:12px;width:50px;text-align:right">+${r.pts}pts</div>
@@ -781,14 +1016,28 @@ function renderRace(){
 
 function renderTravel(){
   document.getElementById('tab-travel').innerHTML=`
-    <div class="ph"><div><div class="pt">🗺️ World Map — 16 Hub Cities</div><div class="ps">1 AP + travel fee per journey · Currently in: <strong>${CITIES[G.city].n}</strong></div></div></div>
-    <div class="ib">💡 <strong>Arbitrage:</strong> Buy where parts are <strong style="color:var(--success)">cheap</strong> (shown as ✓), travel to cities where the same parts are <strong style="color:var(--danger)">expensive</strong>, sell for profit. The spread pays the airfare.</div>
+    <div class="ph">
+      <div>
+        <div class="pt">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 0 0 18M12 3a14 14 0 0 1 0 18"/></svg>
+          Global Motorsport Corridor — 16 World Hubs
+        </div>
+        <div class="ps">1 Action Point + transit airfare per flight · Current paddock base: <strong>${CITIES[G.city].n}</strong></div>
+      </div>
+    </div>
+    <div class="ib">💡 <strong>Arbitrage Economics:</strong> Acquire components in cities where localized surplus drives prices <strong style="color:var(--success)">below base (green ✓)</strong>, transit to venues experiencing acute component shortages <strong style="color:var(--danger)">(red ✗)</strong>, and pocket the price spread to finance team operations!</div>
     <div class="cgrid">${Object.values(CITIES).map(c=>{
       const isCur=c.id===G.city;
       const cheapCats=Object.entries(c.mul).sort((a,b)=>a[1]-b[1]).slice(0,2);
       const expCat=Object.entries(c.mul).sort((a,b)=>b[1]-a[1]).slice(0,1);
-      return`<div class="cityc${isCur?' cur':''}" ${!isCur?`onclick="travelTo('${c.id}')"`:''}">
-        <div class="ctop"><div class="cflag">${c.f}</div><div><div class="cname">${c.n}${isCur?' ✓':''}</div><div class="ccnt">${c.co}</div></div></div>
+      return`<div class="cityc${isCur?' cur':''}" ${!isCur?`onclick="travelTo('${c.id}')"`:''}>
+        <div class="ctop">
+          <div class="cflag">${c.f}</div>
+          <div>
+            <div class="cname">${c.n}${isCur?' (Current Base)':''}</div>
+            <div class="ccnt">${c.co}</div>
+          </div>
+        </div>
         <div class="cspec">${discE(c.disc)} ${c.spec}</div>
         <div class="cprices">
           ${cheapCats.map(([cat,mul])=>`<span class="cpt cheap">✓ ${cat} ${Math.round((1-mul)*100)}% off</span>`).join('')}
@@ -796,7 +1045,7 @@ function renderTravel(){
         </div>
         ${c.grey&&G.greyOk?'<div style="font-size:10px;color:var(--warn);margin-top:4px">⚠ Grey market available</div>':''}
         <div class="tcost">
-          ${isCur?`<span style="color:var(--success);font-size:11px">📍 Current location</span>`:`<span class="tfee">✈ ${fmt(c.tc)} · 1 AP</span><button class="btrv" onclick="event.stopPropagation();travelTo('${c.id}')">GO</button>`}
+          ${isCur?`<span style="color:var(--success);font-size:11px">📍 Stationed in Paddock</span>`:`<span class="tfee">✈ ${fmt(c.tc)} · 1 AP</span><button class="btrv" onclick="event.stopPropagation();travelTo('${c.id}')">TRANSIT</button>`}
         </div>
       </div>`;
     }).join('')}</div>`;
@@ -809,8 +1058,8 @@ function renderTicker(){
     its.push(`<span class="tki ${diff>0?'dn':'up'}">${CITIES[G.city].f} ${p.name}: ${fmt(price)} ${diff>=0?'▲':'▼'}${Math.abs(dp)}%</span>`);
   });
   G.events.forEach(ev=>its.push(`<span class="tki ev">⚡ ${ev.msg}</span>`));
-  if(G.raceHist.length>0){const l=G.raceHist[0];its.push(`<span class="tki">🏁 Last: ${l.n} — P${l.pos} ${fmt(l.prize)}</span>`);}
-  if(G.cash<0)its.push(`<span class="tki" style="color:var(--danger)">⚠ CASH NEGATIVE — pay debts!</span>`);
+  if(G.raceHist.length>0){const l=G.raceHist[0];its.push(`<span class="tki">🏁 Last Race: ${l.n} — P${l.pos} ${fmt(l.prize)}</span>`);}
+  if(G.cash<0)its.push(`<span class="tki" style="color:var(--danger)">⚠ NEGATIVE BALANCE — repay loans!</span>`);
   if(G.greyOk)its.push(`<span class="tki" style="color:var(--warn)">🔓 Grey market unlocked</span>`);
   const dbl=[...its,...its];
   document.getElementById('tki').innerHTML=dbl.join('');
@@ -840,23 +1089,20 @@ document.querySelectorAll('.nb').forEach(btn=>{
 
 document.getElementById('etb').addEventListener('click',()=>{
   const wkI=Object.keys(LENDERS).reduce((s,l)=>s+Math.round(G.loans[l]*LENDERS[l].rate),0);
-  openModal('⏩ End Week '+G.week,`<div style="line-height:1.8">Weekly deductions:<br>• Base ops: <strong>${fmt(G.wkBase)}</strong><br>• Loan interest: <strong>${fmt(wkI)}</strong><br><br>Markets update. Events may trigger.<br>You gain <strong>5 fresh Action Points</strong>.</div>`,[{l:'End Week',fn:endWeek,c:'bcon'}]);
+  openModal('⏩ Advance to Week '+(G.week+1),`<div style="line-height:1.8">Pending weekly deductions:<br>• Base operations: <strong>${fmt(G.wkBase)}</strong><br>• Loan interest: <strong>${fmt(wkI)}</strong><br><br>Global markets will fluctuate. New events may trigger.<br>You will be credited with <strong>5 fresh Action Points</strong>.</div>`,[{l:'Advance Week',fn:endWeek,c:'bcon'}]);
 });
 
 document.getElementById('mo').addEventListener('click',e=>{if(e.target===document.getElementById('mo'))closeModal();});
 
 // ══════════ INIT ══════════
 initPrices();
-// Start with 2 worn parts installed
 G.wh.push({uid:uid(),pid:'suspension_road',cond:45,bp:7500,bc:'portimao',bw:0});
 G.wh.push({uid:uid(),pid:'turbo',cond:55,bp:13500,bc:'portimao',bw:0});
 const s0=G.wh.shift();G.inst.push({uid:s0.uid,pid:'suspension_road',cond:45,iw:0});
 const s1=G.wh.shift();G.inst.push({uid:s1.uid,pid:'turbo',cond:55,iw:0});
-addLog('Welcome to Pit Lane Dealer! Starting in Portimão, Portugal 🇵🇹','');
-addLog('You have $10,000 and a car with 2 worn parts installed.','');
-addLog('Buy parts cheap here (suspension 32% off, tyres 25% off), race, then arbitrage!','');
-addLog('Win your first race to unlock the grey market.','');
-toast('Welcome! $10,000 cash · Portimão · 2 worn parts on car · Race available! 🏎️','i',6000);
+addLog('Welcome to Druglane (Pit Lane Dealer)! Paddock headquarters initialized in Portimão 🇵🇹','');
+addLog('Starting liquidity: $10,000. Car chassis equipped with 2 initial parts.','');
+addLog('Buy discounted components locally, race in sanctioned events, and travel to arbitrage worldwide!','');
 render();
 </script>
 </body>

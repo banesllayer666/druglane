@@ -76,9 +76,12 @@ In **Druglane**, you are an independent racing syndicate manager navigating the 
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & Visual Assets
 
 - **Pure Vanilla HTML5 / CSS3 / JavaScript (ES6+)**
+- **Vector Graphics & Icons**: Curated motorsport vector art and illustrations from [Vecteezy](https://www.vecteezy.com/) free collections:
+  - Custom brand badge, pit stop engineering crew, checkered flags, and vintage Formula racing posters
+  - High-precision inline SVG vector icon set for all 18 components, UI navigation, performance telemetry, and lenders
 - **Modern Responsive UI**: Dark glassmorphic design, responsive layouts, micro-animations, and dynamic data tickers.
 - **Audio & SFX Synthesizer**: Built-in Web Audio API synthesizers for race revs, market ticks, and UI feedback without external audio assets.
 - **Zero Build Tools**: No npm install, no bundlers, zero external npm bloat.
